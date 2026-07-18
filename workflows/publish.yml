@@ -1,0 +1,60 @@
+name: publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Everything runs off the built-in GITHUB_TOKEN. No app, no PAT.
+# Note: commits pushed by this token deliberately do NOT trigger other
+# workflow runs, which is exactly why the site rebuild can commit back
+# to main without creating a loop.
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-${{ github.ref }}
+
+jobs:
+  # Reads conventional commits since the last tag. A `post:` (or feat:/fix:)
+  # commit produces a GitHub Release with generated notes — which also means
+  # every profile gets a free syndication feed at /releases.atom.
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # semantic-release needs full history + tags
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: >
+          npm install --no-save
+          semantic-release@24
+          @semantic-release/commit-analyzer
+          @semantic-release/release-notes-generator
+          @semantic-release/github
+          conventional-changelog-conventionalcommits
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Renders posts/*.md into docs/ (HTML + feed.json) and commits it back.
+  # GitHub Pages serves docs/ directly, so the repo is the whole site.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # so per-post short hashes resolve
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save marked@12
+      - run: node scripts/build.js
+      - name: Commit generated site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git diff --staged --quiet || (git commit -m "chore: rebuild site" && git push)
