@@ -419,6 +419,13 @@ ${top8.map(friendCell).join("\n")}
 ${blogItems || "<li>No posts yet. Commit one with <b>post: hello world</b>.</li>"}
       </ul>
     </div>
+
+    <div class="box orange">
+      <h3><a class="editlink" href="https://github.com/${repoFull}/edit/main/${wallFile}" title="Sign my wall">&#9997; sign</a>${esc(name)}'s Wall <a style="color:#8B2500" href="${siteUrl}wall.html">[View Wall]</a></h3>
+      <div class="pad guestbook-body">
+        ${wall ? marked.parse(wall) : `<p>No entries yet. <a href="https://github.com/${repoFull}/edit/main/${wallFile}">Be the first to sign</a>.</p>`}
+      </div>
+    </div>
   </div>
 
 </div>

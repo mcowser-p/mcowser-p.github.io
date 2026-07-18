@@ -225,6 +225,7 @@ fs.writeFileSync(
       top8: top8.map(({ repo, url, note }) => ({ repo, url, note })),
       following,
       bulletins: bulletins.map((b) => ({ date: b.date, hash: b.hash, text: b.excerpt })),
+      wall: { url: `${siteUrl}wall.html`, file: wallFile, markdown: wall },
       posts: posts.map((p) => ({
         slug: p.slug,
         title: p.title,

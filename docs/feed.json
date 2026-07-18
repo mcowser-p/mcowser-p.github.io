@@ -117,6 +117,11 @@
       "text": "just set up my GitingSocial. it's 2005 again and this time the profile is version controlled"
     }
   ],
+  "wall": {
+    "url": "https://mcowser-p.github.io/GitingSocial-Template/wall.html",
+    "file": "wall.md",
+    "markdown": "- **2026-07-18** — [@octocat](https://github.com/octocat): first!! cool profile ✨\n"
+  },
   "posts": [
     {
       "slug": "hello-world",
