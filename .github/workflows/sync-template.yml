@@ -1,0 +1,52 @@
+name: sync-template
+
+# Pulls the latest GitingSocial template machinery into this profile repo and
+# opens a PR with the changes. Run it from the Actions tab whenever you want
+# updates. Your content wins on any conflict (-X ours): profile.json, posts/,
+# friends/, guestbook.md, and assets/ are never clobbered.
+
+on:
+  workflow_dispatch: {}
+
+env:
+  TEMPLATE_REPO: mcowser-p/GitingSocial-Template
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # template copies share no root commit with the template
+
+      - name: Merge template main
+        id: merge
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add template "https://github.com/${TEMPLATE_REPO}.git"
+          git fetch template main
+          git checkout -b template-sync
+          git merge template/main --allow-unrelated-histories -X ours \
+            -m "chore: sync updates from ${TEMPLATE_REPO}"
+          if git diff --quiet main template-sync; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Already up to date with ${TEMPLATE_REPO}."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open pull request
+        if: steps.merge.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push -f origin template-sync
+          gh pr create --base main --head template-sync \
+            --title "chore: sync updates from template" \
+            --body "Latest changes from [\`${TEMPLATE_REPO}\`](https://github.com/${TEMPLATE_REPO}). Review the diff, then merge — the site rebuilds automatically and no release is cut (\`chore:\`). Your own files won any conflicts." \
+            || echo "PR already exists — updated the branch instead."

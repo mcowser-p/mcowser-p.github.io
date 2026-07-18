@@ -125,6 +125,7 @@ const allPosts = fs
     const heading = (body.match(/^#\s+(.+)$/m) || [])[1];
     return {
       slug,
+      file: `${postsDir}/${f}`,
       type: (meta.type || "post").toLowerCase(),
       title: meta.title || heading || slug.replace(/[-_]/g, " "),
       date: meta.date || dateFromName || fs.statSync(file).mtime.toISOString().slice(0, 10),

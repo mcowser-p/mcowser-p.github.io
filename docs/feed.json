@@ -1,9 +1,9 @@
 {
   "version": 1,
   "owner": "mcowser-p",
-  "repo": "mcowser-p/mcowser-p.github.io",
-  "site": "https://mcowser-p.github.io/",
-  "releases_atom": "https://github.com/mcowser-p/mcowser-p.github.io/releases.atom",
+  "repo": "mcowser-p/GitingSocial-Template",
+  "site": "https://mcowser-p.github.io/GitingSocial-Template/",
+  "releases_atom": "https://github.com/mcowser-p/GitingSocial-Template/releases.atom",
   "profile": {
     "name": "Your Name",
     "bio": "Shipping thoughts as releases.",
@@ -113,7 +113,7 @@
   "bulletins": [
     {
       "date": "2026-07-18",
-      "hash": "7de1b2a",
+      "hash": "8eda7b5",
       "text": "just set up my GitingSocial. it's 2005 again and this time the profile is version controlled"
     }
   ],
@@ -122,8 +122,8 @@
       "slug": "hello-world",
       "title": "Hello, world",
       "date": "2026-07-18",
-      "hash": "7de1b2a",
-      "url": "https://mcowser-p.github.io/p/hello-world.html",
+      "hash": "c4b3f08",
+      "url": "https://mcowser-p.github.io/GitingSocial-Template/p/hello-world.html",
       "excerpt": "This profile is a git repo. This post is a markdown file. The commit that added it said post: hello world , which cut a release — so you can follow me with any feed reader pointed…"
     }
   ]

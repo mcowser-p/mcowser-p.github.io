@@ -39,6 +39,8 @@ a:hover{color:#FF6600; color:var(--accent)}
 
 .box{border:1px solid #6699CC; margin-bottom:12px; background:#fff}
 .box h3{margin:0; padding:3px 8px; font-size:12px}
+.box h3 .editlink{float:right; font-weight:normal; font-size:11px; text-decoration:none; color:inherit; opacity:.75}
+.box h3 .editlink:hover{opacity:1; text-decoration:underline}
 .box .pad{padding:8px}
 .blue h3{background:#6699CC; color:#fff}
 .orange{border-color:#FFCC99; border-color:var(--accent-soft)}
@@ -203,6 +205,18 @@ ${webringStrip}
 <body>${body}</body>
 </html>`;
 
+  // Edit pencils: every box links to the file that feeds it. The owner gets
+  // GitHub's editor; visitors get the auto-fork-and-PR flow.
+  const editIcon = (file, title) =>
+    `<a class="editlink" href="https://github.com/${repoFull}/edit/main/${file}" title="${esc(title || `Edit ${file}`)}">&#9998;</a>`;
+  const today = new Date().toISOString().slice(0, 10);
+  const newPostUrl = `https://github.com/${repoFull}/new/main?filename=posts/${today}-my-new-post.md&value=${encodeURIComponent(
+    `---\ntitle: My new post\ndate: ${today}\n---\n\nWrite your post here, then commit with a message like \`post: my new post\` to publish it as a release.\n`
+  )}`;
+  const newBulletinUrl = `https://github.com/${repoFull}/new/main?filename=posts/${today}-bulletin.md&value=${encodeURIComponent(
+    `---\ntype: bulletin\ndate: ${today}\n---\n\nyour status here\n`
+  )}`;
+
   // Details/Interests are free-form key/value maps from profile.json; a value
   // may itself be a map (rendered as bold sub-labels, the classic profile sites-style).
   const multiline = (s) => esc(String(s)).replace(/\n/g, "<br>");
@@ -288,7 +302,7 @@ ${webringStrip}
     ${
       profile.song
         ? `<div class="box blue song-box">
-      <h3>Profile Song</h3>
+      <h3>${editIcon("profile.json", "Change your song")}Profile Song</h3>
       <div class="pad">
         <audio controls src="${esc(profile.song)}"></audio>
         <div class="song-note">no autoplay. we learned our lesson.</div>
@@ -299,7 +313,7 @@ ${webringStrip}
     ${
       bulletins.length
         ? `<div class="box blue">
-      <h3>${esc(name)}'s Bulletins</h3>
+      <h3><a class="editlink" href="${newBulletinUrl}" title="Post a bulletin">&#43; new</a>${esc(name)}'s Bulletins</h3>
       <ul class="bulletin-list">
 ${bulletins.map((b) => `        <li><span class="bdate">${esc(b.date)}</span> — ${esc(b.excerpt)}</li>`).join("\n")}
       </ul>
@@ -309,7 +323,7 @@ ${bulletins.map((b) => `        <li><span class="bdate">${esc(b.date)}</span> �
     ${
       Object.keys(details).length
         ? `<div class="box blue">
-      <h3>${esc(name)}'s Details</h3>
+      <h3>${editIcon("profile.json", "Edit your details")}${esc(name)}'s Details</h3>
       <table class="dtable">
 ${kvRows(details)}
       </table>
@@ -319,7 +333,7 @@ ${kvRows(details)}
     ${
       schools.length
         ? `<div class="box blue">
-      <h3>${esc(name)}'s Schools</h3>
+      <h3>${editIcon("profile.json", "Edit your schools")}${esc(name)}'s Schools</h3>
       <table class="dtable">
 ${schools
   .map(
@@ -335,7 +349,7 @@ ${schools
     ${
       Object.keys(interests).length
         ? `<div class="box blue">
-      <h3>${esc(name)}'s Interests</h3>
+      <h3>${editIcon("profile.json", "Edit your interests")}${esc(name)}'s Interests</h3>
       <table class="dtable">
 ${kvRows(interests)}
       </table>
@@ -369,7 +383,7 @@ ${kvRows(interests)}
     <div class="network">${esc(name)} is in your <span class="accent">extended network</span></div>
 
     <div class="box orange blurbs">
-      <h3>${esc(name)}'s Blurbs</h3>
+      <h3>${editIcon("profile.json", "Edit your blurbs")}${esc(name)}'s Blurbs</h3>
       <div class="pad">
 ${Object.entries(blurbs)
   .map(([k, v]) => `        <p class="label">${esc(k)}:</p>\n        <p>${multiline(v)}</p>`)
@@ -380,7 +394,7 @@ ${Object.entries(blurbs)
     ${
       top8.length
         ? `<div class="box orange">
-      <h3>${esc(name)}'s Top ${top8.length}</h3>
+      <h3>${editIcon("profile.json", "Edit your Top 8")}${esc(name)}'s Top ${top8.length}</h3>
       <div class="top8-count">${esc(name)} has <b>${top8.length}</b> repos in their Top ${top8.length}.</div>
       <div class="top8-grid">
 ${top8.map(friendCell).join("\n")}
@@ -390,7 +404,7 @@ ${top8.map(friendCell).join("\n")}
     }
 
     <div class="box orange">
-      <h3>${esc(name)}'s Latest Blog Entries <a style="color:#8B2500" href="${siteUrl}blog.html">[View Blog]</a></h3>
+      <h3><a class="editlink" href="${newPostUrl}" title="Write a new blog post">&#43; new entry</a>${esc(name)}'s Latest Blog Entries <a style="color:#8B2500" href="${siteUrl}blog.html">[View Blog]</a></h3>
       <ul class="blog-list">
 ${blogItems || "<li>No posts yet. Commit one with <b>post: hello world</b>.</li>"}
       </ul>
@@ -504,7 +518,7 @@ ${following
       chrome(`<div class="postpage">
 <p class="back"><a href="${siteUrl}">&laquo; Back to ${esc(name)}'s profile</a></p>
 <div class="box orange">
-  <h3>${esc(name)}'s Guestbook</h3>
+  <h3>${editIcon("guestbook.md", "Edit / moderate guestbook")}${esc(name)}'s Guestbook</h3>
   <div class="pad guestbook-body">
     <div class="sign-cta">&#9997;&#65039; <a href="https://github.com/${repoFull}/edit/main/guestbook.md">Sign my guestbook</a> — add a line, open the pull request, and you're in when I merge.</div>
     ${guestbook ? marked.parse(guestbook) : "<p>No entries yet. Be the first!</p>"}
@@ -517,7 +531,7 @@ ${following
       chrome(`<div class="postpage">
 <p class="back"><a href="${siteUrl}">&laquo; Back to ${esc(name)}'s profile</a></p>
 <div class="box orange">
-  <h3>${esc(name)}'s Blog</h3>
+  <h3><a class="editlink" href="${newPostUrl}" title="Write a new blog post">&#43; new entry</a>${esc(name)}'s Blog</h3>
   <ul class="blog-list">
 ${allBlogItems || "<li>No posts yet.</li>"}
   </ul>
@@ -532,7 +546,7 @@ ${allBlogItems || "<li>No posts yet.</li>"}
       chrome(`<div class="postpage">
 <p class="back"><a href="${siteUrl}">&laquo; Back to ${esc(name)}'s profile</a></p>
 <div class="box orange">
-  <h3>${esc(p.title)}</h3>
+  <h3>${editIcon(p.file, "Edit this post")}${esc(p.title)}</h3>
   <div class="pad post-body">
     <div class="post-meta">${esc(p.date)} · commit <b>${p.hash}</b></div>
     ${marked.parse(p.body)}

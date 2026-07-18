@@ -120,6 +120,10 @@ If you follow anyone, every page gets a webring footer: ← prev · random · ne
 
 `"avatar": ""` uses your GitHub profile picture; if it ever fails to load, the page falls back to the anonymous gray sitting cat (this is a social network, someone has to be the default silhouette). The cat is a real file at `assets/default-avatar.svg` — overwrite it with your own image to reskin the fallback. `"avatar": "cat"` forces the cat; any other value is used as an image URL.
 
+## Staying up to date
+
+Sites made from this template don't go stale: **Actions → sync-template → Run workflow** fetches the latest template machinery and opens a PR against your repo. Review the diff, merge, done — your site rebuilds and no release is cut. Your content (`profile.json`, `posts/`, `friends/`, `guestbook.md`, `assets/`) wins any conflict, and skipping updates is always safe — old and new sites speak the same `feed.json`/`releases.atom` protocol.
+
 ## Files
 
 ```

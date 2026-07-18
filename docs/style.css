@@ -29,6 +29,8 @@ a:hover{color:#FF6600; color:var(--accent)}
 
 .box{border:1px solid #6699CC; margin-bottom:12px; background:#fff}
 .box h3{margin:0; padding:3px 8px; font-size:12px}
+.box h3 .editlink{float:right; font-weight:normal; font-size:11px; text-decoration:none; color:inherit; opacity:.75}
+.box h3 .editlink:hover{opacity:1; text-decoration:underline}
 .box .pad{padding:8px}
 .blue h3{background:#6699CC; color:#fff}
 .orange{border-color:#FFCC99; border-color:var(--accent-soft)}
