@@ -392,6 +392,13 @@ ${kvRows(interests)}
   <div class="right">
     <div class="network">${esc(name)} is in your <span class="accent">extended network</span></div>
 
+    <div class="box orange">
+      <h3><a class="editlink" href="${newPostUrl}" title="Write a new blog post">&#43; new entry</a>${esc(name)}'s Latest Blog Entries <a style="color:#8B2500" href="${siteUrl}blog.html">[View Blog]</a></h3>
+      <ul class="blog-list">
+${blogItems || "<li>No posts yet. Commit one with <b>post: hello world</b>.</li>"}
+      </ul>
+    </div>
+
     <div class="box orange blurbs">
       <h3>${editIcon("profile.json", "Edit your blurbs")}${esc(name)}'s Blurbs</h3>
       <div class="pad">
@@ -412,13 +419,6 @@ ${top8.map(friendCell).join("\n")}
     </div>`
         : ""
     }
-
-    <div class="box orange">
-      <h3><a class="editlink" href="${newPostUrl}" title="Write a new blog post">&#43; new entry</a>${esc(name)}'s Latest Blog Entries <a style="color:#8B2500" href="${siteUrl}blog.html">[View Blog]</a></h3>
-      <ul class="blog-list">
-${blogItems || "<li>No posts yet. Commit one with <b>post: hello world</b>.</li>"}
-      </ul>
-    </div>
 
     <div class="box orange">
       <h3><a class="editlink" href="https://github.com/${repoFull}/edit/main/${wallFile}" title="Sign my wall">&#9997; sign</a>${esc(name)}'s Wall <a style="color:#8B2500" href="${siteUrl}wall.html">[View Wall]</a></h3>
