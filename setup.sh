@@ -4,13 +4,13 @@
 # Usage: ./setup.sh [repo-name]     (default: gitsocial-template)
 set -euo pipefail
 
-NAME="${1:-gitsocial-template}"
+NAME="${1:-gitingsocial-template}"
 ME="$(gh api user -q .login)"
 FULL="$ME/$NAME"
 
 git init -b main >/dev/null 2>&1 || true
 git add -A
-git commit -m "feat: gitsocial template" >/dev/null 2>&1 || echo "(nothing new to commit)"
+git commit -m "feat: GitingSocial template" >/dev/null 2>&1 || echo "(nothing new to commit)"
 
 if gh repo view "$FULL" >/dev/null 2>&1; then
   echo "Repo $FULL exists — pushing to it."

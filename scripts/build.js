@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Renders posts/*.md -> docs/ (index.html, p/<slug>.html, feed.json, style.css)
+// Renders posts/*.md -> docs/ using the template named in profile.json.
+// Templates live in templates/<name>/template.js — a function (ctx) => { "path": "content" }.
 // No config needed: owner/repo and the Pages URL are derived from the Actions env.
 
 const fs = require("fs");
@@ -15,7 +16,63 @@ const siteUrl =
     : `https://${owner}.github.io/${repo}/`;
 
 const profile = JSON.parse(fs.readFileSync("profile.json", "utf8"));
+
+// Avatar: "" -> your GitHub avatar (falls back to the sitting-cat placeholder if it
+// can't load), "cat" -> force the placeholder, anything else -> used verbatim as a URL.
+// The placeholder is a real file at assets/default-avatar.svg — overwrite it to reskin.
+const fallbackAvatar = `${siteUrl}assets/default-avatar.svg`;
 if (!profile.avatar) profile.avatar = `https://github.com/${owner}.png`;
+else if (profile.avatar === "cat") profile.avatar = fallbackAvatar;
+
+// Profile song: a site-relative path (e.g. "assets/song.mp3") or a full URL.
+if (profile.song && !/^https?:/.test(profile.song)) profile.song = siteUrl + profile.song.replace(/^\//, "");
+
+// Top 8: entries are "owner/repo" strings (or { repo, note }), order is the ranking.
+const top8 = (profile.top8 || [])
+  .slice(0, 8)
+  .map((e) => (typeof e === "string" ? { repo: e } : e))
+  .filter((e) => e.repo && e.repo.includes("/"))
+  .map((e) => {
+    const [repoOwner, repoName] = e.repo.split("/");
+    return {
+      repo: e.repo,
+      owner: repoOwner,
+      name: repoName,
+      note: e.note || "",
+      url: `https://github.com/${e.repo}`,
+      avatar: `https://github.com/${repoOwner}.png?size=80`,
+    };
+  });
+
+// Following: one file per friend in friends/ — filename is arbitrary, content is
+// {"repo": "owner/repo"} (or a bare "owner/repo" string). One-file-per-friend
+// means concurrent friend-request PRs never conflict. profile.following (legacy
+// array) still works and is merged in. Pages URLs derive like our own siteUrl.
+const friendEntries = [...(profile.following || [])];
+if (fs.existsSync("friends")) {
+  for (const f of fs.readdirSync("friends").sort()) {
+    if (f.startsWith(".") || f.toLowerCase() === "readme.md") continue;
+    const raw = fs.readFileSync(path.join("friends", f), "utf8").trim();
+    if (!raw) continue;
+    try {
+      friendEntries.push(JSON.parse(raw));
+    } catch {
+      friendEntries.push(raw);
+    }
+  }
+}
+const following = friendEntries
+  .map((e) => (typeof e === "string" ? { repo: e } : e))
+  .filter((e) => e.repo && e.repo.includes("/"))
+  .map((e) => {
+    const [fOwner, fRepo] = e.repo.split("/");
+    const fSite =
+      fRepo.toLowerCase() === `${fOwner.toLowerCase()}.github.io`
+        ? `https://${fOwner}.github.io/`
+        : `https://${fOwner}.github.io/${fRepo}/`;
+    return { repo: e.repo, owner: fOwner, site: fSite, feed: `${fSite}feed.json` };
+  })
+  .filter((e, i, a) => a.findIndex((x) => x.repo === e.repo) === i);
 
 // ---------- helpers ----------
 
@@ -57,7 +114,7 @@ function excerpt(md, n = 180) {
 // ---------- load posts ----------
 
 const postsDir = "posts";
-const posts = fs
+const allPosts = fs
   .readdirSync(postsDir)
   .filter((f) => f.endsWith(".md"))
   .map((f) => {
@@ -68,6 +125,7 @@ const posts = fs
     const heading = (body.match(/^#\s+(.+)$/m) || [])[1];
     return {
       slug,
+      type: (meta.type || "post").toLowerCase(),
       title: meta.title || heading || slug.replace(/[-_]/g, " "),
       date: meta.date || dateFromName || fs.statSync(file).mtime.toISOString().slice(0, 10),
       hash: shortHash(file),
@@ -77,142 +135,73 @@ const posts = fs
   })
   .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug < b.slug ? 1 : -1));
 
-// ---------- html ----------
+// Bulletins (front matter `type: bulletin`) are short one-off statuses: they show
+// on the profile but get no page of their own and stay out of the blog.
+const bulletins = allPosts.filter((p) => p.type === "bulletin");
+const posts = allPosts.filter((p) => p.type !== "bulletin");
 
-const CSS = `
-:root{
-  --paper:#F2F5F7; --ink:#16232D; --muted:#5A6B77;
-  --accent:#F05133; --line:#D3DDE3; --card:#FFFFFF;
+// Guestbook: a markdown file visitors sign via PR. Rendered as-is by templates.
+const guestbook = fs.existsSync("guestbook.md") ? fs.readFileSync("guestbook.md", "utf8") : "";
+
+// Webring: a stable loop over you + everyone you follow (alphabetical), so every
+// member's site computes compatible prev/next neighbors from its own follow list.
+const ringSites = [...new Set([siteUrl, ...following.map((f) => f.site)])].sort();
+const ringIdx = ringSites.indexOf(siteUrl);
+const webring =
+  ringSites.length > 1
+    ? {
+        prev: ringSites[(ringIdx - 1 + ringSites.length) % ringSites.length],
+        next: ringSites[(ringIdx + 1) % ringSites.length],
+        sites: ringSites,
+      }
+    : null;
+
+// ---------- render via template ----------
+
+const templateName = profile.template || "gitlog";
+const templateFile = path.resolve("templates", templateName, "template.js");
+if (!fs.existsSync(templateFile)) {
+  const available = fs.readdirSync("templates").filter((d) => fs.existsSync(path.join("templates", d, "template.js")));
+  console.error(`Unknown template "${templateName}" in profile.json. Available: ${available.join(", ")}`);
+  process.exit(1);
 }
-*{box-sizing:border-box}
-body{
-  margin:0; color:var(--ink); background:var(--paper);
-  background-image:
-    linear-gradient(rgba(22,35,45,.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22,35,45,.045) 1px, transparent 1px);
-  background-size:24px 24px;
-  font:16px/1.65 "IBM Plex Sans", system-ui, sans-serif;
-}
-.mono{font-family:"IBM Plex Mono", ui-monospace, monospace}
-.wrap{max-width:680px; margin:0 auto; padding:48px 20px 80px}
-a{color:inherit; text-decoration-color:var(--accent); text-underline-offset:3px}
-a:hover{color:var(--accent)}
-a:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+const render = require(templateFile);
 
-.profile{display:flex; gap:20px; align-items:flex-start; margin-bottom:12px}
-.profile img{width:72px; height:72px; border-radius:10px; border:2px solid var(--ink); background:var(--card)}
-.profile h1{font-family:"IBM Plex Mono",monospace; font-size:26px; line-height:1.2; margin:0}
-.handle{color:var(--muted); font-size:14px}
-.bio{margin:6px 0 0}
-.meta-links{margin:16px 0 40px; font-size:13px; display:flex; gap:18px; flex-wrap:wrap}
-.meta-links a{color:var(--muted); text-decoration:none; border-bottom:1px solid var(--line)}
-.meta-links a:hover{color:var(--accent); border-color:var(--accent)}
-
-.feed{list-style:none; margin:0; padding:4px 0 0 30px; border-left:2px solid var(--line)}
-.entry{position:relative; margin:0 0 34px}
-.entry::before{
-  content:""; position:absolute; left:-37px; top:8px;
-  width:10px; height:10px; border-radius:50%;
-  background:var(--accent); border:3px solid var(--paper);
-}
-.entry .oneline{font-size:13px; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap}
-.entry .hash{color:var(--accent)}
-.entry h2{font-family:"IBM Plex Mono",monospace; font-size:19px; margin:4px 0 6px}
-.entry h2 a{text-decoration:none}
-.entry h2 a:hover{text-decoration:underline; text-decoration-color:var(--accent)}
-.entry p{margin:0; color:var(--ink)}
-
-.prose h1{font-family:"IBM Plex Mono",monospace; font-size:28px; line-height:1.25; margin:0 0 4px}
-.prose .oneline{font-size:13px; color:var(--muted); margin-bottom:28px}
-.prose .oneline .hash{color:var(--accent)}
-.prose pre{background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; overflow-x:auto; font-size:14px}
-.prose code{font-family:"IBM Plex Mono",monospace; font-size:.92em}
-.prose img{max-width:100%; border-radius:8px}
-.prose blockquote{margin:0; padding:2px 0 2px 16px; border-left:3px solid var(--accent); color:var(--muted)}
-.back{display:inline-block; margin-bottom:32px; font-size:13px; color:var(--muted); text-decoration:none}
-.back:hover{color:var(--accent)}
-footer{margin-top:64px; font-size:12px; color:var(--muted)}
-@media (prefers-reduced-motion: no-preference){
-  a{transition:color .12s ease}
-}
-`;
-
-const shell = (title, body) => `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${siteUrl}style.css">
-<link rel="alternate" type="application/atom+xml" href="https://github.com/${repoFull}/releases.atom">
-</head>
-<body><div class="wrap">${body}</div></body>
-</html>`;
-
-const oneline = (p) =>
-  `<span class="oneline mono"><span class="hash">${p.hash}</span><span>${esc(p.date)}</span></span>`;
-
-const header = `
-<div class="profile">
-  <img src="${esc(profile.avatar)}" alt="">
-  <div>
-    <h1>${esc(profile.name)}</h1>
-    <div class="handle mono">@${esc(owner)}</div>
-    <p class="bio">${esc(profile.bio || "")}</p>
-  </div>
-</div>
-<nav class="meta-links mono">
-  <a href="https://github.com/${repoFull}">source</a>
-  <a href="https://github.com/${repoFull}/releases">changelog</a>
-  <a href="https://github.com/${repoFull}/releases.atom">follow (atom)</a>
-  ${profile.links && profile.links.website ? `<a href="${esc(profile.links.website)}">website</a>` : ""}
-</nav>`;
+const ctx = { owner, repo, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, esc, marked };
+const files = render(ctx);
 
 // ---------- write docs/ ----------
 
 fs.rmSync("docs", { recursive: true, force: true });
-fs.mkdirSync("docs/p", { recursive: true });
-fs.writeFileSync("docs/style.css", CSS);
-
-const feedItems = posts
-  .map(
-    (p) => `<li class="entry">
-  ${oneline(p)}
-  <h2><a href="${siteUrl}p/${esc(p.slug)}.html">${esc(p.title)}</a></h2>
-  <p>${esc(p.excerpt)}</p>
-</li>`
-  )
-  .join("\n");
-
-fs.writeFileSync(
-  "docs/index.html",
-  shell(
-    `${profile.name} · git log`,
-    `${header}
-<ul class="feed">
-${feedItems || '<li class="entry"><p>No posts yet. Commit one with <code class="mono">post: hello world</code>.</p></li>'}
-</ul>
-<footer class="mono">generated from <a href="https://github.com/${repoFull}">${repoFull}</a> · every post is a commit</footer>`
-  )
-);
-
-for (const p of posts) {
-  fs.writeFileSync(
-    `docs/p/${p.slug}.html`,
-    shell(
-      `${p.title} · ${profile.name}`,
-      `<a class="back mono" href="${siteUrl}">&larr; git log</a>
-<article class="prose">
-  <h1>${esc(p.title)}</h1>
-  ${oneline(p)}
-  ${marked.parse(p.body)}
-</article>`
-    )
-  );
+for (const [rel, content] of Object.entries(files)) {
+  const out = path.join("docs", rel);
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, content);
 }
 
+// Always shipped regardless of template: assets/ (placeholder avatar + anything you
+// drop next to it), Jekyll opt-out, machine feed.
+if (fs.existsSync("assets")) fs.cpSync("assets", "docs/assets", { recursive: true });
+fs.writeFileSync("docs/.nojekyll", "");
+
+// 88x31 button: the classic old-web badge, generated at a known URL
+// (assets/button.svg) so members can show each other's buttons with no
+// coordination. Drop your own assets/button.svg (or .png/.gif) to override.
+if (!fs.existsSync("assets/button.svg")) {
+  const accent = /^#[0-9a-fA-F]{3,8}$/.test(profile.themeColor || "") ? profile.themeColor : "#FF6600";
+  const buttonName = (profile.name || owner).slice(0, 14);
+  fs.writeFileSync(
+    "docs/assets/button.svg",
+    `<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" role="img" aria-label="${esc(buttonName)}">
+  <rect width="88" height="31" fill="#1B3F7C"/>
+  <rect x="0" y="27" width="88" height="4" fill="${accent}"/>
+  <rect x="0.5" y="0.5" width="87" height="30" fill="none" stroke="#9FC1F0"/>
+  <text x="4" y="10" font-family="Verdana, sans-serif" font-size="7" fill="#9FC1F0">GitingSocial</text>
+  <text x="4" y="23" font-family="Verdana, sans-serif" font-size="9" font-weight="bold" fill="#FFFFFF">${esc(buttonName)}</text>
+</svg>
+`
+  );
+}
 fs.writeFileSync(
   "docs/feed.json",
   JSON.stringify(
@@ -223,6 +212,9 @@ fs.writeFileSync(
       site: siteUrl,
       releases_atom: `https://github.com/${repoFull}/releases.atom`,
       profile,
+      top8: top8.map(({ repo, url, note }) => ({ repo, url, note })),
+      following,
+      bulletins: bulletins.map((b) => ({ date: b.date, hash: b.hash, text: b.excerpt })),
       posts: posts.map((p) => ({
         slug: p.slug,
         title: p.title,
@@ -237,4 +229,4 @@ fs.writeFileSync(
   )
 );
 
-console.log(`Built ${posts.length} post(s) -> docs/ (${siteUrl})`);
+console.log(`Built ${posts.length} post(s) with template "${templateName}" -> docs/ (${siteUrl})`);
