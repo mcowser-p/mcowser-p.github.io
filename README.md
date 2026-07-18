@@ -79,7 +79,7 @@ All optional, all in `profile.json`:
 "flair": { "marquee": true, "sparkle": true }
 ```
 
-`mood` and `away` render under your avatar, AIM-style. `song` (a file in `assets/` or a URL) adds a Profile Song player — play is a button, never automatic; we all remember. `themeColor` reskins the accent color across the whole site. `flair.marquee` scrolls your bio in an honest-to-goodness `<marquee>`; `flair.sparkle` adds a cursor sparkle trail (auto-disabled for visitors with reduced-motion set).
+`mood` and `away` render under your avatar, AIM-style. `song` adds a Profile Song box: an audio file in `assets/` (or any direct audio URL) gets a player, and a YouTube link (`watch`, `youtu.be`, or `shorts` URL) gets the embedded video instead. Play is a button, never automatic; we all remember. `themeColor` reskins the accent color across the whole site. `flair.marquee` scrolls your bio in an honest-to-goodness `<marquee>`; `flair.sparkle` adds a cursor sparkle trail (auto-disabled for visitors with reduced-motion set).
 
 ### Blurbs, Details, Schools & Interests
 

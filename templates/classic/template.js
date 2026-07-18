@@ -119,6 +119,7 @@ a:hover{color:#FF6600; color:var(--accent)}
 .mutual{color:#008A00; font-weight:bold; font-size:10px; margin-left:4px}
 
 .song-box audio{width:100%; margin-top:4px}
+.song-box iframe{width:100%; aspect-ratio:16/9; border:0; display:block}
 .song-note{font-size:10px; color:#666}
 
 .bulletin-list{list-style:none; margin:0; padding:8px; font-size:11px}
@@ -233,6 +234,11 @@ ${webringStrip}
       )
       .join("\n");
 
+  // A YouTube "song" renders as an embedded player instead of an <audio> tag.
+  const songYouTubeId = ((profile.song || "").match(
+    /(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,20})/
+  ) || [])[1];
+
   const details = profile.details || {};
   const interests = profile.interests || {};
   const schools = profile.schools || [];
@@ -304,7 +310,11 @@ ${webringStrip}
         ? `<div class="box blue song-box">
       <h3>${editIcon("profile.json", "Change your song")}Profile Song</h3>
       <div class="pad">
-        <audio controls src="${esc(profile.song)}"></audio>
+        ${
+          songYouTubeId
+            ? `<iframe src="https://www.youtube-nocookie.com/embed/${songYouTubeId}" title="Profile song" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>`
+            : `<audio controls src="${esc(profile.song)}"></audio>`
+        }
         <div class="song-note">no autoplay. we learned our lesson.</div>
       </div>
     </div>`
