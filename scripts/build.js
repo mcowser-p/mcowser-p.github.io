@@ -17,6 +17,13 @@ const siteUrl =
 
 const profile = JSON.parse(fs.readFileSync("profile.json", "utf8"));
 
+// Cache-buster appended to asset URLs (style.css?v=...) so a new deploy's HTML
+// never renders with a stale cached stylesheet.
+let buildId = String(Date.now());
+try {
+  buildId = execSync("git rev-parse --short HEAD").toString().trim() || buildId;
+} catch {}
+
 // Avatar: "" -> your GitHub avatar (falls back to the sitting-cat placeholder if it
 // can't load), "cat" -> force the placeholder, anything else -> used verbatim as a URL.
 // The placeholder is a real file at assets/default-avatar.svg — overwrite it to reskin.
@@ -168,7 +175,7 @@ if (!fs.existsSync(templateFile)) {
 }
 const render = require(templateFile);
 
-const ctx = { owner, repo, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, esc, marked };
+const ctx = { owner, repo, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, buildId, esc, marked };
 const files = render(ctx);
 
 // ---------- write docs/ ----------

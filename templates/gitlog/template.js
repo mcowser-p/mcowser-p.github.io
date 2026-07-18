@@ -1,7 +1,7 @@
 // "gitlog" — commit-timeline profile. The original template.
 // Contract: module.exports = (ctx) => { "relative/path": "file contents", ... }
 
-module.exports = function render({ owner, repoFull, siteUrl, profile, posts, top8, fallbackAvatar, esc, marked }) {
+module.exports = function render({ owner, repoFull, siteUrl, profile, posts, top8, fallbackAvatar, buildId, esc, marked }) {
   const CSS = `
 :root{
   --paper:#F2F5F7; --ink:#16232D; --muted:#5A6B77;
@@ -72,7 +72,7 @@ footer{margin-top:64px; font-size:12px; color:var(--muted)}
 <title>${esc(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${siteUrl}style.css">
+<link rel="stylesheet" href="${siteUrl}style.css?v=${buildId}">
 <link rel="alternate" type="application/atom+xml" href="https://github.com/${repoFull}/releases.atom">
 </head>
 <body><div class="wrap">${body}</div></body>

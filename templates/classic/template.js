@@ -2,7 +2,7 @@
 // contact box, extended-network banner, blurbs, Top 8 repos, blog entries.
 // Contract: module.exports = (ctx) => { "relative/path": "file contents", ... }
 
-module.exports = function render({ owner, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, esc, marked }) {
+module.exports = function render({ owner, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, buildId, esc, marked }) {
   const name = profile.name || owner;
   const lastUpdate = posts.length ? posts[0].date : "never";
   const flair = profile.flair || {};
@@ -119,7 +119,7 @@ a:hover{color:#FF6600; color:var(--accent)}
 .mutual{color:#008A00; font-weight:bold; font-size:10px; margin-left:4px}
 
 .song-box audio{width:100%; margin-top:4px}
-.song-box iframe{width:100%; aspect-ratio:16/9; border:0; display:block}
+.song-box iframe{width:100%; max-width:100%; aspect-ratio:16/9; border:0; display:block}
 .song-note{font-size:10px; color:#666}
 
 .bulletin-list{list-style:none; margin:0; padding:8px; font-size:11px}
@@ -200,7 +200,7 @@ ${webringStrip}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
-<link rel="stylesheet" href="${siteUrl}style.css">
+<link rel="stylesheet" href="${siteUrl}style.css?v=${buildId}">
 <link rel="alternate" type="application/atom+xml" href="https://github.com/${repoFull}/releases.atom">
 </head>
 <body>${body}</body>
