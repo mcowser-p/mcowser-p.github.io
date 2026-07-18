@@ -124,6 +124,14 @@
   },
   "posts": [
     {
+      "slug": "a-developer-social-site-on-github",
+      "title": "I built a developer social site on GitHub (and you can join)",
+      "date": "2026-07-18",
+      "hash": "176ebc0",
+      "url": "https://mcowser-p.github.io/p/a-developer-social-site-on-github.html",
+      "excerpt": "This page you're reading is not hosted on a social network. It is the social network. The whole profile — the Top 8, the wall, the profile song, this blog post — is a public git re…"
+    },
+    {
       "slug": "hello-world",
       "title": "Hello, world",
       "date": "2026-07-18",
