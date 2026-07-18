@@ -5,12 +5,11 @@
   "site": "https://mcowser-p.github.io/",
   "releases_atom": "https://github.com/mcowser-p/mcowser-p.github.io/releases.atom",
   "profile": {
-    "name": "Your Name",
+    "name": "Matthew Cowser",
     "bio": "Shipping thoughts as releases.",
     "avatar": "https://github.com/mcowser-p.png",
     "template": "classic",
-    "mood": "extremely online",
-    "away": "brb, force pushing",
+    "mood": "online",
     "song": "https://www.youtube.com/watch?v=3U39iYB9wDA",
     "themeColor": "",
     "flair": {
@@ -18,42 +17,32 @@
       "sparkle": true
     },
     "blurbs": {
-      "About me": "Shipping thoughts as releases. This whole profile is a git repo — this page included.",
-      "Who I'd like to meet": "Anyone with a green contribution graph and a feed reader."
+      "About me": "Platform Engineer who thought it would be funny to showcase my knowlege of Git and Github by implementing an early social media platform via the free tier github. ;^) ",
+      "Who I'd like to meet": "Anyone I can learn from."
     },
     "details": {
-      "Status": "Committed",
-      "Here For": "Networking, Serious Repositories, Friends",
-      "Hometown": "localhost",
-      "Zodiac Sign": "Octocat",
+      "Here For": "Networking, Friends",
+      "Hometown": "Vegas",
       "Smoke / Drink": "No / Coffee",
-      "Occupation": "Pushing to main"
+      "Occupation": "Cloud Engineer"
     },
     "interests": {
-      "General": "The old web, RSS feeds, static sites, version control, cats",
+      "General": "The old web, version control",
       "Music": {
         "Bands": "The Commits, Push, Rebase Against the Machine",
-        "Instruments": "mechanical keyboard (blue switches, sorry)"
+        "Instruments": "None"
       },
-      "Movies": "Hackers, WarGames, The Social Network (as a cautionary tale)",
-      "Television": "Tuned out. Except for lo-fi coding streams."
+      "Movies": "Fight Club",
+      "Television": "Tuned out"
     },
-    "schools": [
-      {
-        "name": "Stack Overflow University",
-        "place": "The Internet",
-        "years": "2008 to present",
-        "details": "Degree: Copy & Paste Engineering\nClubs: Marked as Duplicate Society"
-      }
-    ],
     "top8": [
+      "torvalds",
+      "gitster",
       "octocat/Hello-World",
-      "git/git",
-      "torvalds/linux",
-      "nodejs/node",
-      "microsoft/vscode",
-      "rust-lang/rust",
       "python/cpython",
+      "git/git",
+      "opentofu/opentofu",
+      "ansible/ansible",
       "github/docs"
     ],
     "links": {
@@ -67,33 +56,23 @@
       "note": ""
     },
     {
+      "repo": "python/cpython",
+      "url": "https://github.com/python/cpython",
+      "note": ""
+    },
+    {
       "repo": "git/git",
       "url": "https://github.com/git/git",
       "note": ""
     },
     {
-      "repo": "torvalds/linux",
-      "url": "https://github.com/torvalds/linux",
+      "repo": "opentofu/opentofu",
+      "url": "https://github.com/opentofu/opentofu",
       "note": ""
     },
     {
-      "repo": "nodejs/node",
-      "url": "https://github.com/nodejs/node",
-      "note": ""
-    },
-    {
-      "repo": "microsoft/vscode",
-      "url": "https://github.com/microsoft/vscode",
-      "note": ""
-    },
-    {
-      "repo": "rust-lang/rust",
-      "url": "https://github.com/rust-lang/rust",
-      "note": ""
-    },
-    {
-      "repo": "python/cpython",
-      "url": "https://github.com/python/cpython",
+      "repo": "ansible/ansible",
+      "url": "https://github.com/ansible/ansible",
       "note": ""
     },
     {
