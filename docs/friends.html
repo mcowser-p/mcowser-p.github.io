@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name&#39;s Friends Feed | GitingSocial</title>
+<link rel="stylesheet" href="https://mcowser-p.github.io/GitingSocial-Template/style.css">
+<link rel="alternate" type="application/atom+xml" href="https://github.com/mcowser-p/GitingSocial-Template/releases.atom">
+</head>
+<body>
+<div class="topbar">
+  <span class="logo"><a href="https://mcowser-p.github.io/GitingSocial-Template/">Giting<span class="logo-accent">Social</span></a></span>
+  <span class="tagline">a place for repos</span>
+</div>
+<div class="navbar">
+  <a href="https://mcowser-p.github.io/GitingSocial-Template/">Home</a> <span>|</span>
+  <a href="https://mcowser-p.github.io/GitingSocial-Template/friends.html">Friends</a> <span>|</span>
+  <a href="https://mcowser-p.github.io/GitingSocial-Template/guestbook.html">Guestbook</a> <span>|</span>
+  <a href="https://github.com/mcowser-p/GitingSocial-Template">Source</a> <span>|</span>
+  <a href="https://github.com/mcowser-p">GitHub</a>
+</div>
+<div class="postpage">
+<p class="back"><a href="https://mcowser-p.github.io/GitingSocial-Template/">&laquo; Back to Your Name's profile</a></p>
+<div class="box orange">
+  <h3>Your Name's Friends Feed</h3>
+  <div id="fstatus" class="fstatus"></div>
+  <div id="flist"></div>
+</div>
+<div class="box orange">
+  <h3>Button Wall</h3>
+  <div class="btnwall">
+    <a href="https://mcowser-p.github.io/giting-social-template/"><img src="https://mcowser-p.github.io/giting-social-template/assets/button.svg" alt="mcowser-p/giting-social-template" onerror="this.parentNode.style.display='none'"></a>
+  </div>
+  <div class="btnwall-note">88&times;31 buttons from the sites Your Name follows.</div>
+</div>
+</div>
+<script>
+var FRIENDS = [{"repo":"mcowser-p/giting-social-template","owner":"mcowser-p","site":"https://mcowser-p.github.io/giting-social-template/","feed":"https://mcowser-p.github.io/giting-social-template/feed.json"}];
+var FALLBACK = "https://mcowser-p.github.io/GitingSocial-Template/assets/default-avatar.svg";
+var MYREPO = "mcowser-p/GitingSocial-Template";
+var list = document.getElementById("flist");
+var statusEl = document.getElementById("fstatus");
+
+function el(tag, cls, text) {
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text) n.textContent = text;
+  return n;
+}
+
+if (!FRIENDS.length) {
+  statusEl.textContent = "Not following anyone yet. Add \"owner/repo\" entries to \"following\" in profile.json.";
+} else {
+  statusEl.textContent = "Loading " + FRIENDS.length + " friend feed(s)\u2026";
+  Promise.allSettled(
+    FRIENDS.map(function (f) {
+      return fetch(f.feed).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      }).then(function (d) { return { f: f, d: d }; });
+    })
+  ).then(function (results) {
+    var entries = [], unreachable = [];
+    results.forEach(function (res, i) {
+      if (res.status !== "fulfilled") { unreachable.push(FRIENDS[i].repo); return; }
+      var d = res.value.d, f = res.value.f;
+      var who = (d.profile && d.profile.name) || d.owner || f.owner;
+      var avatar = (d.profile && d.profile.avatar) || FALLBACK;
+      var mutual = (d.following || []).some(function (x) { return x && x.repo === MYREPO; });
+      (d.posts || []).forEach(function (p) {
+        entries.push({ who: who, avatar: avatar, mutual: mutual, site: d.site || f.site, title: p.title, date: p.date, url: p.url, excerpt: p.excerpt });
+      });
+    });
+    entries.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    statusEl.remove();
+    if (!entries.length) list.appendChild(el("div", "fstatus", "No posts from friends yet."));
+    entries.slice(0, 50).forEach(function (e) {
+      var row = el("div", "fentry");
+      var img = el("img");
+      img.src = e.avatar;
+      img.onerror = function () { this.onerror = null; this.src = FALLBACK; };
+      row.appendChild(img);
+      var body = el("div");
+      var who = el("div", "fwho");
+      var wa = el("a"); wa.href = e.site; var wb = el("b", null, e.who); wa.appendChild(wb);
+      who.appendChild(wa);
+      if (e.mutual) who.appendChild(el("span", "mutual", "\u2713 follows you back"));
+      who.appendChild(document.createTextNode(" posted \u00b7 " + e.date));
+      body.appendChild(who);
+      var ta = el("a", "ftitle", e.title); ta.href = e.url;
+      body.appendChild(ta);
+      if (e.excerpt) body.appendChild(el("div", "fex", e.excerpt));
+      row.appendChild(body);
+      list.appendChild(row);
+    });
+    if (unreachable.length) {
+      list.appendChild(el("div", "funreach", "Couldn\u2019t reach: " + unreachable.join(", ")));
+    }
+  });
+}
+</script>
+<div class="webring">GitingSocial webring:
+  <a href="https://mcowser-p.github.io/giting-social-template/">&larr; prev</a> &middot;
+  <a href="#" onclick="location.href=WEBRING[Math.floor(Math.random()*WEBRING.length)];return false">random</a> &middot;
+  <a href="https://mcowser-p.github.io/giting-social-template/">next &rarr;</a>
+</div>
+<script>var WEBRING=["https://mcowser-p.github.io/GitingSocial-Template/","https://mcowser-p.github.io/giting-social-template/"];</script>
+<div class="pagefoot">&copy;2005-forever Your Name · generated from <a href="https://github.com/mcowser-p/GitingSocial-Template">mcowser-p/GitingSocial-Template</a> · every post is a commit</div>
+<script>
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  var last = 0;
+  addEventListener("mousemove", function (e) {
+    var now = Date.now();
+    if (now - last < 60) return;
+    last = now;
+    var s = document.createElement("span");
+    s.className = "spark";
+    s.textContent = "\u2726";
+    s.style.left = e.clientX + 6 + "px";
+    s.style.top = e.clientY + 6 + "px";
+    document.body.appendChild(s);
+    setTimeout(function () { s.remove(); }, 700);
+  });
+}
+</script></body>
+</html>

@@ -1,0 +1,135 @@
+
+*{box-sizing:border-box}
+:root{
+  --accent:#FF6600;
+  --accent-soft:color-mix(in srgb, #FF6600 30%, white);
+  --accent-dark:color-mix(in srgb, #FF6600 55%, black);
+}
+body{margin:0; background:#FFFFFF; color:#000;
+  font:13px/1.5 Verdana, Arial, Helvetica, sans-serif}
+a{color:#003399}
+a:hover{color:#FF6600; color:var(--accent)}
+
+.topbar{background:linear-gradient(#1B3F7C,#30549B); color:#fff; padding:8px 14px;
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.topbar .logo{font:bold 22px Arial, sans-serif; letter-spacing:-1px}
+.topbar .logo a{color:#fff; text-decoration:none}
+.topbar .logo-accent{color:#9FC1F0}
+.topbar .tagline{font-size:11px; color:#C5D3EE}
+.navbar{background:#6699CC; padding:4px 14px; font-size:11px; font-weight:bold}
+.navbar a{color:#fff; text-decoration:none; margin-right:4px}
+.navbar a:hover{text-decoration:underline}
+.navbar span{color:#BFD5EA}
+
+.wrap{max-width:840px; margin:10px auto 40px; padding:0 10px}
+.cols{display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap}
+.left{width:300px; flex-shrink:0}
+.right{flex:1; min-width:280px}
+@media (max-width:660px){.left{width:100%}}
+
+.box{border:1px solid #6699CC; margin-bottom:12px; background:#fff}
+.box h3{margin:0; padding:3px 8px; font-size:12px}
+.box .pad{padding:8px}
+.blue h3{background:#6699CC; color:#fff}
+.orange{border-color:#FFCC99; border-color:var(--accent-soft)}
+.orange h3{background:#FFCC99; background:var(--accent-soft); color:#8B2500; color:var(--accent-dark)}
+.orange h3 a{color:#8B2500; color:var(--accent-dark)}
+
+.who{font:bold 17px Arial, sans-serif; margin:2px 0 8px}
+.idcard{display:flex; gap:10px}
+.idcard img.avatar{width:110px; height:110px; border:1px solid #999; background:#DDE3E8; object-fit:cover}
+.idcard .facts{font-size:11px}
+.idcard .facts div{margin-bottom:4px}
+.online{color:#008A00; font-weight:bold; font-size:11px}
+.online .dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:#00C000; margin-right:3px}
+@media (prefers-reduced-motion: no-preference){
+  .online .dot{animation:blink 1.4s step-end infinite}
+  @keyframes blink{50%{opacity:.25}}
+}
+.viewmy{font-size:11px; margin-top:8px}
+
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:4px 10px; font-size:11px;
+  background:#D5E8FB; padding:8px; margin:0}
+.contact-grid a{text-decoration:none}
+.contact-grid a:hover{text-decoration:underline}
+
+.url-box{font-size:11px; word-break:break-all}
+
+.dtable{width:100%; border-collapse:separate; border-spacing:2px; font-size:11px; margin:0}
+.dtable td{padding:5px 6px; vertical-align:top}
+.dtable .dlabel{background:#D5E8FB; color:#336699; font-weight:bold; width:36%}
+.dtable .dval{background:#EFF6FD}
+.dtable .dval b{color:#336699}
+.dtable .sname{color:#003399}
+.dtable .school-years{white-space:nowrap; width:26%}
+
+.network{border:2px solid #000; text-align:center; padding:14px 8px; margin-bottom:12px;
+  font:bold 15px Arial, sans-serif}
+.network .accent{color:#FF6600; color:var(--accent)}
+
+.blurbs .label{color:#FF6600; color:var(--accent); font-weight:bold; margin:0 0 4px}
+.blurbs p{margin:0 0 10px}
+
+.top8-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:8px}
+@media (max-width:660px){.top8-grid{grid-template-columns:repeat(2,1fr)}}
+.friend{text-align:center; font-size:11px; padding:6px 2px}
+.friend img{width:72px; height:72px; border:1px solid #999; object-fit:cover; background:#DDE3E8}
+.friend .fname{font-weight:bold; display:block; margin-top:3px; word-break:break-all}
+.friend .fowner{color:#666; word-break:break-all}
+.friend .fnote{color:#666; font-style:italic}
+.top8-count{font-size:11px; padding:0 8px 6px; color:#333}
+
+.blog-list{list-style:none; margin:0; padding:8px}
+.blog-list li{margin-bottom:8px; font-size:12px}
+.blog-list .bdate{color:#666; font-size:11px}
+.view-all{font-size:11px; padding:0 8px 8px}
+
+.postpage{max-width:640px; margin:10px auto 40px; padding:0 10px}
+.post-body{font-size:13px}
+.post-body pre{background:#F4F4F4; border:1px solid #CCC; padding:10px; overflow-x:auto; font-size:12px}
+.post-body code{font-family:"Courier New", monospace}
+.post-body img{max-width:100%}
+.post-body blockquote{margin:0 0 10px; padding:2px 0 2px 12px; border-left:3px solid #FFCC99; color:#555}
+.post-meta{font-size:11px; color:#666; margin-bottom:12px}
+.back{font-size:11px}
+
+.pagefoot{text-align:center; font-size:10px; color:#666; margin:30px 0}
+
+.fentry{display:flex; gap:10px; padding:10px 8px; border-bottom:1px solid #FFE8D0; border-bottom-color:var(--accent-soft)}
+.fentry:last-child{border-bottom:none}
+.fentry img{width:50px; height:50px; border:1px solid #999; object-fit:cover; background:#DDE3E8; flex-shrink:0}
+.fentry .fwho{font-size:11px; color:#666}
+.fentry .fwho b{color:#003399}
+.fentry .ftitle{font-weight:bold}
+.fentry .fex{font-size:12px; color:#333; margin-top:2px}
+.fstatus{padding:10px 8px; font-size:12px; color:#666}
+.funreach{padding:4px 8px 10px; font-size:11px; color:#996}
+.mutual{color:#008A00; font-weight:bold; font-size:10px; margin-left:4px}
+
+.song-box audio{width:100%; margin-top:4px}
+.song-note{font-size:10px; color:#666}
+
+.bulletin-list{list-style:none; margin:0; padding:8px; font-size:11px}
+.bulletin-list li{margin-bottom:8px}
+.bulletin-list .bdate{color:#666}
+
+.guestbook-body{font-size:12px}
+.guestbook-body ul{list-style:none; margin:0; padding:0}
+.guestbook-body li{padding:8px 0; border-bottom:1px dashed #CCC}
+.guestbook-body li:last-child{border-bottom:none}
+.sign-cta{font-size:11px; margin-bottom:8px}
+
+.button-box img{display:block; margin-bottom:6px}
+.button-code{width:100%; height:56px; font:10px/1.4 "Courier New", monospace; border:1px solid #CCC; resize:none}
+.btnwall{display:flex; flex-wrap:wrap; gap:6px; padding:8px}
+.btnwall img{width:88px; height:31px; border:0; display:block}
+.btnwall-note{font-size:10px; color:#666; padding:0 8px 8px}
+
+.webring{text-align:center; font-size:11px; margin:24px 0 0; color:#666}
+.webring a{text-decoration:none}
+.webring a:hover{text-decoration:underline}
+
+.spark{position:fixed; pointer-events:none; z-index:9999; font-size:12px; color:var(--accent);
+  animation:sparkfade .7s ease-out forwards}
+@keyframes sparkfade{to{opacity:0; transform:translateY(14px) scale(.3)}}
+marquee{display:block}

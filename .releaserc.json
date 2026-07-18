@@ -1,0 +1,26 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [{ "type": "post", "release": "patch" }]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "post", "section": "Posts", "hidden": false },
+            { "type": "feat", "section": "Features", "hidden": false },
+            { "type": "fix", "section": "Fixes", "hidden": false }
+          ]
+        }
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}

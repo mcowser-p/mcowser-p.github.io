@@ -1,0 +1,56 @@
+{
+  "name": "Your Name",
+  "bio": "Shipping thoughts as releases.",
+  "avatar": "",
+  "template": "classic",
+  "mood": "extremely online",
+  "away": "brb, force pushing",
+  "song": "",
+  "themeColor": "",
+  "flair": {
+    "marquee": true,
+    "sparkle": true
+  },
+  "blurbs": {
+    "About me": "Shipping thoughts as releases. This whole profile is a git repo — this page included.",
+    "Who I'd like to meet": "Anyone with a green contribution graph and a feed reader."
+  },
+  "details": {
+    "Status": "Committed",
+    "Here For": "Networking, Serious Repositories, Friends",
+    "Hometown": "localhost",
+    "Zodiac Sign": "Octocat",
+    "Smoke / Drink": "No / Coffee",
+    "Occupation": "Pushing to main"
+  },
+  "interests": {
+    "General": "The old web, RSS feeds, static sites, version control, cats",
+    "Music": {
+      "Bands": "The Commits, Push, Rebase Against the Machine",
+      "Instruments": "mechanical keyboard (blue switches, sorry)"
+    },
+    "Movies": "Hackers, WarGames, The Social Network (as a cautionary tale)",
+    "Television": "Tuned out. Except for lo-fi coding streams."
+  },
+  "schools": [
+    {
+      "name": "Stack Overflow University",
+      "place": "The Internet",
+      "years": "2008 to present",
+      "details": "Degree: Copy & Paste Engineering\nClubs: Marked as Duplicate Society"
+    }
+  ],
+  "top8": [
+    "octocat/Hello-World",
+    "git/git",
+    "torvalds/linux",
+    "nodejs/node",
+    "microsoft/vscode",
+    "rust-lang/rust",
+    "python/cpython",
+    "github/docs"
+  ],
+  "links": {
+    "website": ""
+  }
+}

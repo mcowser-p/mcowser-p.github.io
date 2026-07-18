@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "owner": "mcowser-p",
+  "repo": "mcowser-p/GitingSocial-Template",
+  "site": "https://mcowser-p.github.io/GitingSocial-Template/",
+  "releases_atom": "https://github.com/mcowser-p/GitingSocial-Template/releases.atom",
+  "profile": {
+    "name": "Your Name",
+    "bio": "Shipping thoughts as releases.",
+    "avatar": "https://github.com/mcowser-p.png",
+    "template": "classic",
+    "mood": "extremely online",
+    "away": "brb, force pushing",
+    "song": "",
+    "themeColor": "",
+    "flair": {
+      "marquee": true,
+      "sparkle": true
+    },
+    "blurbs": {
+      "About me": "Shipping thoughts as releases. This whole profile is a git repo — this page included.",
+      "Who I'd like to meet": "Anyone with a green contribution graph and a feed reader."
+    },
+    "details": {
+      "Status": "Committed",
+      "Here For": "Networking, Serious Repositories, Friends",
+      "Hometown": "localhost",
+      "Zodiac Sign": "Octocat",
+      "Smoke / Drink": "No / Coffee",
+      "Occupation": "Pushing to main"
+    },
+    "interests": {
+      "General": "The old web, RSS feeds, static sites, version control, cats",
+      "Music": {
+        "Bands": "The Commits, Push, Rebase Against the Machine",
+        "Instruments": "mechanical keyboard (blue switches, sorry)"
+      },
+      "Movies": "Hackers, WarGames, The Social Network (as a cautionary tale)",
+      "Television": "Tuned out. Except for lo-fi coding streams."
+    },
+    "schools": [
+      {
+        "name": "Stack Overflow University",
+        "place": "The Internet",
+        "years": "2008 to present",
+        "details": "Degree: Copy & Paste Engineering\nClubs: Marked as Duplicate Society"
+      }
+    ],
+    "top8": [
+      "octocat/Hello-World",
+      "git/git",
+      "torvalds/linux",
+      "nodejs/node",
+      "microsoft/vscode",
+      "rust-lang/rust",
+      "python/cpython",
+      "github/docs"
+    ],
+    "links": {
+      "website": ""
+    }
+  },
+  "top8": [
+    {
+      "repo": "octocat/Hello-World",
+      "url": "https://github.com/octocat/Hello-World",
+      "note": ""
+    },
+    {
+      "repo": "git/git",
+      "url": "https://github.com/git/git",
+      "note": ""
+    },
+    {
+      "repo": "torvalds/linux",
+      "url": "https://github.com/torvalds/linux",
+      "note": ""
+    },
+    {
+      "repo": "nodejs/node",
+      "url": "https://github.com/nodejs/node",
+      "note": ""
+    },
+    {
+      "repo": "microsoft/vscode",
+      "url": "https://github.com/microsoft/vscode",
+      "note": ""
+    },
+    {
+      "repo": "rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust",
+      "note": ""
+    },
+    {
+      "repo": "python/cpython",
+      "url": "https://github.com/python/cpython",
+      "note": ""
+    },
+    {
+      "repo": "github/docs",
+      "url": "https://github.com/github/docs",
+      "note": ""
+    }
+  ],
+  "following": [
+    {
+      "repo": "mcowser-p/giting-social-template",
+      "owner": "mcowser-p",
+      "site": "https://mcowser-p.github.io/giting-social-template/",
+      "feed": "https://mcowser-p.github.io/giting-social-template/feed.json"
+    }
+  ],
+  "bulletins": [
+    {
+      "date": "2026-07-18",
+      "hash": "8eda7b5",
+      "text": "just set up my GitingSocial. it's 2005 again and this time the profile is version controlled"
+    }
+  ],
+  "posts": [
+    {
+      "slug": "hello-world",
+      "title": "Hello, world",
+      "date": "2026-07-18",
+      "hash": "c4b3f08",
+      "url": "https://mcowser-p.github.io/GitingSocial-Template/p/hello-world.html",
+      "excerpt": "This profile is a git repo. This post is a markdown file. The commit that added it said post: hello world , which cut a release — so you can follow me with any feed reader pointed…"
+    }
+  ]
+}
