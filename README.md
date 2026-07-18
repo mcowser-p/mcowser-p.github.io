@@ -98,9 +98,9 @@ The classic profile boxes, all optional, all free-form in `profile.json` — you
 
 A post with `type: bulletin` in its front matter is a status, not an essay: it shows in a Bulletins box on your profile (and in `feed.json`) but gets no page and stays out of the blog. Same deal as posts otherwise — it's a markdown file and a commit.
 
-### Guestbook
+### The Wall
 
-`guestbook.md` renders at `/guestbook.html`. Visitors sign it by pull request — the "Sign Guestbook" link opens GitHub's editor on the file, which forks and PRs automatically for non-collaborators. Merging the PR publishes the entry. Moderation is just code review.
+`wall.md` renders at `/wall.html`. Visitors sign it by pull request — the "Sign My Wall" link opens GitHub's editor on the file, which forks and PRs automatically for non-collaborators. Merging the PR publishes the entry. Moderation is just code review. (Repos from older template versions with a `guestbook.md` keep working — the build falls back to it.)
 
 ### Friend requests
 

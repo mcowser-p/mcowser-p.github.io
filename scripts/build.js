@@ -148,8 +148,10 @@ const allPosts = fs
 const bulletins = allPosts.filter((p) => p.type === "bulletin");
 const posts = allPosts.filter((p) => p.type !== "bulletin");
 
-// Guestbook: a markdown file visitors sign via PR. Rendered as-is by templates.
-const guestbook = fs.existsSync("guestbook.md") ? fs.readFileSync("guestbook.md", "utf8") : "";
+// The wall: a markdown file visitors sign via PR. Rendered as-is by templates.
+// (guestbook.md is the legacy name, still honored for un-migrated repos.)
+const wallFile = fs.existsSync("wall.md") ? "wall.md" : fs.existsSync("guestbook.md") ? "guestbook.md" : "wall.md";
+const wall = fs.existsSync(wallFile) ? fs.readFileSync(wallFile, "utf8") : "";
 
 // Webring: a stable loop over you + everyone you follow (alphabetical), so every
 // member's site computes compatible prev/next neighbors from its own follow list.
@@ -175,7 +177,7 @@ if (!fs.existsSync(templateFile)) {
 }
 const render = require(templateFile);
 
-const ctx = { owner, repo, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, buildId, esc, marked };
+const ctx = { owner, repo, repoFull, siteUrl, profile, posts, bulletins, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked };
 const files = render(ctx);
 
 // ---------- write docs/ ----------

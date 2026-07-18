@@ -2,7 +2,7 @@
 // contact box, extended-network banner, blurbs, Top 8 repos, blog entries.
 // Contract: module.exports = (ctx) => { "relative/path": "file contents", ... }
 
-module.exports = function render({ owner, repoFull, siteUrl, profile, posts, bulletins, top8, following, guestbook, webring, fallbackAvatar, buildId, esc, marked }) {
+module.exports = function render({ owner, repoFull, siteUrl, profile, posts, bulletins, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked }) {
   const name = profile.name || owner;
   const lastUpdate = posts.length ? posts[0].date : "never";
   const flair = profile.flair || {};
@@ -186,7 +186,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
 <div class="navbar">
   <a href="${siteUrl}">Home</a> <span>|</span>
   <a href="${siteUrl}friends.html">Friends</a> <span>|</span>
-  <a href="${siteUrl}guestbook.html">Guestbook</a> <span>|</span>
+  <a href="${siteUrl}wall.html">Wall</a> <span>|</span>
   <a href="https://github.com/${repoFull}">Source</a> <span>|</span>
   <a href="https://github.com/${esc(owner)}">GitHub</a>
 </div>
@@ -302,7 +302,7 @@ ${webringStrip}
         <a href="https://github.com/${repoFull}/issues">&#128027; Report a Bug</a>
         <a href="https://github.com/${repoFull}">&#11088; Star Me</a>
         <a href="https://github.com/${repoFull}/releases.atom" title="Atom feed of my releases — point a feed reader at this">&#128225; Subscribe (RSS)</a>
-        <a href="https://github.com/${repoFull}/edit/main/guestbook.md" title="Sign via pull request">&#9997;&#65039; Sign Guestbook</a>
+        <a href="https://github.com/${repoFull}/edit/main/${wallFile}" title="Sign via pull request">&#9997;&#65039; Sign My Wall</a>
       </div>
     </div>
     ${
@@ -523,15 +523,15 @@ ${following
     "style.css": CSS,
     "index.html": shell(`${name} | GitingSocial`, chrome(indexBody)),
     "friends.html": shell(`${name}'s Friends Feed | GitingSocial`, chrome(friendsBody)),
-    "guestbook.html": shell(
-      `${name}'s Guestbook | GitingSocial`,
+    "wall.html": shell(
+      `${name}'s Wall | GitingSocial`,
       chrome(`<div class="postpage">
 <p class="back"><a href="${siteUrl}">&laquo; Back to ${esc(name)}'s profile</a></p>
 <div class="box orange">
-  <h3>${editIcon("guestbook.md", "Edit / moderate guestbook")}${esc(name)}'s Guestbook</h3>
+  <h3>${editIcon(wallFile, "Edit / moderate your wall")}${esc(name)}'s Wall</h3>
   <div class="pad guestbook-body">
-    <div class="sign-cta">&#9997;&#65039; <a href="https://github.com/${repoFull}/edit/main/guestbook.md">Sign my guestbook</a> — add a line, open the pull request, and you're in when I merge.</div>
-    ${guestbook ? marked.parse(guestbook) : "<p>No entries yet. Be the first!</p>"}
+    <div class="sign-cta">&#9997;&#65039; <a href="https://github.com/${repoFull}/edit/main/${wallFile}">Sign my wall</a> — add a line, open the pull request, and you're in when I merge.</div>
+    ${wall ? marked.parse(wall) : "<p>No entries yet. Be the first!</p>"}
   </div>
 </div>
 </div>`)
