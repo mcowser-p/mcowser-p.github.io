@@ -218,7 +218,7 @@ ${webringStrip}
     `---\ntitle: My new post\ndate: ${today}\n---\n\nWrite your post here, then commit with a message like \`post: my new post\` to publish it as a release.\n`
   )}`;
   const newUpdateUrl = `https://github.com/${repoFull}/new/main?filename=posts/${today}-update.md&value=${encodeURIComponent(
-    `---\ntype: update\ndate: ${today}\n---\n\nyour status here\n`
+    `---\ntype: update\ndate: ${today}\n---\n\nyour status here\n\n<!-- commit with a message like \`update: your status\` so followers get notified; use chore: to stay silent -->\n`
   )}`;
 
   // Details/Interests are free-form key/value maps from profile.json; a value

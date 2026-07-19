@@ -5,7 +5,10 @@
       "@semantic-release/commit-analyzer",
       {
         "preset": "conventionalcommits",
-        "releaseRules": [{ "type": "post", "release": "patch" }]
+        "releaseRules": [
+          { "type": "post", "release": "patch" },
+          { "type": "update", "release": "patch" }
+        ]
       }
     ],
     [
@@ -15,6 +18,7 @@
         "presetConfig": {
           "types": [
             { "type": "post", "section": "Posts", "hidden": false },
+            { "type": "update", "section": "Updates", "hidden": false },
             { "type": "feat", "section": "Features", "hidden": false },
             { "type": "fix", "section": "Fixes", "hidden": false }
           ]

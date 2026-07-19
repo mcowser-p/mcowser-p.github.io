@@ -101,7 +101,7 @@ The classic profile boxes, all optional, all free-form in `profile.json` — you
 
 ### Updates
 
-A post with `type: update` in its front matter is a status, not an essay: it shows in an Updates box on your profile (and in `feed.json`) but gets no page and stays out of the blog. Same deal as posts otherwise — it's a markdown file and a commit. (`type: bulletin` is a legacy alias.)
+A post with `type: update` in its front matter is a status, not an essay: it shows in an Updates box on your profile (and in `feed.json`) but gets no page and stays out of the blog. Commit it with an `update:` message (`update: shipped the thing`) to cut a release — that's what pushes it to followers via `releases.atom` — or with `chore:` to post silently. (`type: bulletin` is a legacy alias.)
 
 ### The Wall
 

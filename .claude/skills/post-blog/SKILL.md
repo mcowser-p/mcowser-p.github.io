@@ -36,16 +36,17 @@ git add posts/ && git commit -m "post: my post title" && git push
 
 Same, but add `type: update` to the front matter (`bulletin` is a legacy
 alias). Updates show in the profile's Updates box and feed.json but get no
-page and stay out of the blog. Commit with `chore:` unless the user wants a
-release cut for it.
+page and stay out of the blog. Commit with the `update:` type
+(`update: shipped the thing`) — it cuts a patch release so followers are
+notified, same as posts. Use `chore:` only if the user wants it silent.
 
 ## What a push does
 
-- **`post:` / `feat:` / `fix:` commit** → semantic-release cuts a GitHub
+- **`post:` / `update:` / `feat:` / `fix:` commit** → semantic-release cuts a GitHub
   Release (release notes = the feed entry followers see via `releases.atom`),
   AND the site rebuilds.
 - **`chore:` / `docs:` commit** → site rebuilds only, no release. Use for
-  profile edits, updates, wall moderation.
+  profile edits, wall moderation.
 
 The build commits generated `docs/` back to `main` itself — never edit `docs/`
 by hand, and don't be surprised by `chore: rebuild site` bot commits.
