@@ -51,39 +51,21 @@
   },
   "top8": [
     {
+      "kind": "user",
+      "user": "torvalds",
+      "url": "https://github.com/torvalds",
+      "note": ""
+    },
+    {
+      "kind": "user",
+      "user": "gitster",
+      "url": "https://github.com/gitster",
+      "note": ""
+    },
+    {
       "kind": "repo",
       "repo": "octocat/Hello-World",
       "url": "https://github.com/octocat/Hello-World",
-      "note": ""
-    },
-    {
-      "kind": "repo",
-      "repo": "git/git",
-      "url": "https://github.com/git/git",
-      "note": ""
-    },
-    {
-      "kind": "repo",
-      "repo": "torvalds/linux",
-      "url": "https://github.com/torvalds/linux",
-      "note": ""
-    },
-    {
-      "kind": "repo",
-      "repo": "nodejs/node",
-      "url": "https://github.com/nodejs/node",
-      "note": ""
-    },
-    {
-      "kind": "repo",
-      "repo": "microsoft/vscode",
-      "url": "https://github.com/microsoft/vscode",
-      "note": ""
-    },
-    {
-      "kind": "repo",
-      "repo": "rust-lang/rust",
-      "url": "https://github.com/rust-lang/rust",
       "note": ""
     },
     {
