@@ -112,20 +112,25 @@
   ],
   "updates": [
     {
+      "slug": "bulletin",
       "date": "2026-07-19",
       "hash": "6fc745b",
-      "text": "Just setting up my GitingSocial !"
+      "text": "Just setting up my GitingSocial !",
+      "url": "https://mcowser-p.github.io/updates.html#bulletin"
     },
     {
+      "slug": "followers-get-notified-now",
       "date": "2026-07-18",
       "hash": "492cec5",
-      "text": "status updates now ship as releases too — follow me with a feed reader on releases.atom, or Watch → Custom → Releases on this repo to get notified"
+      "text": "status updates now ship as releases too — follow me with a feed reader on releases.atom, or Watch → Custom → Releases on this repo to get notified",
+      "url": "https://mcowser-p.github.io/updates.html#followers-get-notified-now"
     },
     {
+      "slug": "first-update",
       "date": "2026-07-18",
       "hash": "87a8bd6",
       "text": "just set up my GitingSocial. it's 2005 again and this time the profile is version controlled",
-      "url": "https://mcowser-p.github.io/GitingSocial-Template/updates.html#first-update"
+      "url": "https://mcowser-p.github.io/updates.html#first-update"
     }
   ],
   "wall": {
