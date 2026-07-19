@@ -113,7 +113,7 @@
   "bulletins": [
     {
       "date": "2026-07-18",
-      "hash": "7de1b2a",
+      "hash": "ec40404",
       "text": "just set up my GitingSocial. it's 2005 again and this time the profile is version controlled"
     }
   ],
@@ -124,20 +124,20 @@
   },
   "posts": [
     {
-      "slug": "a-developer-social-site-on-github",
-      "title": "I built a developer social site on GitHub (and you can join)",
-      "date": "2026-07-18",
-      "hash": "176ebc0",
-      "url": "https://mcowser-p.github.io/p/a-developer-social-site-on-github.html",
-      "excerpt": "This page you're reading is not hosted on a social network. It is the social network. The whole profile — the Top 8, the wall, the profile song, this blog post — is a public git re…"
-    },
-    {
       "slug": "hello-world",
       "title": "Hello, world",
       "date": "2026-07-18",
-      "hash": "7de1b2a",
+      "hash": "ec40404",
       "url": "https://mcowser-p.github.io/p/hello-world.html",
       "excerpt": "This profile is a git repo. This post is a markdown file. The commit that added it said post: hello world , which cut a release — so you can follow me with any feed reader pointed…"
+    },
+    {
+      "slug": "a-developer-social-site-on-github",
+      "title": "I built a developer social site on GitHub (and you can join)",
+      "date": "2026-07-18",
+      "hash": "8a8d42a",
+      "url": "https://mcowser-p.github.io/p/a-developer-social-site-on-github.html",
+      "excerpt": "This page you're reading is not hosted on a social network. It is the social network. The whole profile — the Top 8, the wall, the profile song, this blog post — is a public git re…"
     }
   ]
 }

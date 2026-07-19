@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I built a developer social site on GitHub (and you can join) | Matthew Cowser&#39;s Blog</title>
+<link rel="stylesheet" href="https://mcowser-p.github.io/style.css?v=dc64d0c">
+<link rel="alternate" type="application/atom+xml" href="https://github.com/mcowser-p/mcowser-p.github.io/releases.atom">
+</head>
+<body>
+<div class="topbar">
+  <span class="logo"><a href="https://mcowser-p.github.io/">Giting<span class="logo-accent">Social</span></a></span>
+  <span class="tagline">a place for repos</span>
+</div>
+<div class="navbar">
+  <a href="https://mcowser-p.github.io/">Home</a> <span>|</span>
+  <a href="https://mcowser-p.github.io/friends.html">Friends</a> <span>|</span>
+  <a href="https://mcowser-p.github.io/wall.html">Wall</a> <span>|</span>
+  <a href="https://github.com/mcowser-p/mcowser-p.github.io">Source</a> <span>|</span>
+  <a href="https://github.com/mcowser-p">GitHub</a>
+</div>
+<div class="postpage">
+<p class="back"><a href="https://mcowser-p.github.io/">&laquo; Back to Matthew Cowser's profile</a></p>
+<div class="box orange">
+  <h3><a class="editlink" href="https://github.com/mcowser-p/mcowser-p.github.io/edit/main/posts/2026-07-18-a-developer-social-site-on-github.md" title="Edit this post">&#9998;</a>I built a developer social site on GitHub (and you can join)</h3>
+  <div class="pad post-body">
+    <div class="post-meta">2026-07-18 · commit <b>8a8d42a</b></div>
+    <p>This page you&#39;re reading is not hosted on a social network. It <strong>is</strong> the social
+network. The whole profile — the Top 8, the wall, the profile song, this blog
+post — is a public git repo, rendered to a static site by GitHub Actions and
+served free on GitHub Pages. I&#39;m calling it <strong>GitingSocial</strong>: a place for repos.</p>
+<h2>How it works</h2>
+<ul>
+<li><strong>Your profile is a repo.</strong> <code>profile.json</code> holds your name, bio, mood, away
+message, Top 8 repos, interests, and profile song. Every box on the page has
+a little ✎ pencil that opens the editor for the file behind it.</li>
+<li><strong>Posting is a commit.</strong> This post is a markdown file in <code>posts/</code>. The commit
+that added it cut a GitHub Release — and every repo gets a free Atom feed of
+its releases, so that&#39;s the follow mechanism. No algorithm, no ranking:
+whoever you follow, you see, newest first.</li>
+<li><strong>Friends are files.</strong> Following someone means adding a one-line JSON file to
+your <code>friends/</code> folder. A friend request is a pull request that adds <em>your</em>
+file to <em>their</em> folder. Merge to accept. My Friends page assembles a feed in
+your browser from each friend&#39;s <code>feed.json</code> — static files reading static
+files, no server anywhere.</li>
+<li><strong>The wall is a markdown file.</strong> Sign it by PR. Moderation is code review.</li>
+<li>There&#39;s also a webring, 88×31 buttons, bulletins, and a marquee bio, because
+it&#39;s 2005 and I make the rules now.</li>
+</ul>
+<p>Delete your repo and your data is gone from the network — because your repo
+<em>was</em> your account. If GitHub vanished tomorrow, every member still has their
+entire profile, posts, and social graph in a folder on their machine.</p>
+<h2>Make yours (~2 minutes)</h2>
+<ol>
+<li>Go to <a href="https://github.com/mcowser-p/GitingSocial-Template">mcowser-p/GitingSocial-Template</a>
+and hit <strong>Use this template → Create a new repository</strong>. Name it
+<code>&lt;your-username&gt;.github.io</code> (public) to get the root URL, or anything else
+for <code>&lt;you&gt;.github.io/&lt;repo&gt;/</code>.</li>
+<li><strong>Settings → Pages</strong> → Source: <em>Deploy from a branch</em> → <code>main</code>, folder <code>/docs</code>.</li>
+<li><strong>Actions → publish → Run workflow</strong> to force the first build.</li>
+<li>Open your new site and start clicking pencils: put your name in
+<code>profile.json</code>, rank your Top 8, set a profile song (a YouTube link embeds
+the player).</li>
+</ol>
+<p>Then sign my wall, or send me a friend request — there are buttons on the left.
+Both are pull requests, which means the entire social site runs on the same
+machinery as code review, which is the funniest possible way to run a social
+network.</p>
+<p>New template features ship as PRs to you too: <strong>Actions → sync-template</strong> pulls
+the latest machinery without touching your content. And if you use Claude Code
+or another agent, the repo ships skills that teach it to post, follow, and
+handle friend requests for you.</p>
+<p>Welcome to GitingSocial. A place for repos.</p>
+
+  </div>
+</div>
+</div>
+<div class="webring">GitingSocial webring:
+  <a href="https://mcowser-p.github.io/giting-social-template/">&larr; prev</a> &middot;
+  <a href="#" onclick="location.href=WEBRING[Math.floor(Math.random()*WEBRING.length)];return false">random</a> &middot;
+  <a href="https://mcowser-p.github.io/giting-social-template/">next &rarr;</a>
+</div>
+<script>var WEBRING=["https://mcowser-p.github.io/","https://mcowser-p.github.io/giting-social-template/"];</script>
+<div class="pagefoot">&copy;2005-forever Matthew Cowser · generated from <a href="https://github.com/mcowser-p/mcowser-p.github.io">mcowser-p/mcowser-p.github.io</a> · every post is a commit</div>
+<script>
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  var last = 0;
+  addEventListener("mousemove", function (e) {
+    var now = Date.now();
+    if (now - last < 60) return;
+    last = now;
+    var s = document.createElement("span");
+    s.className = "spark";
+    s.textContent = "\u2726";
+    s.style.left = e.clientX + 6 + "px";
+    s.style.top = e.clientY + 6 + "px";
+    document.body.appendChild(s);
+    setTimeout(function () { s.remove(); }, 700);
+  });
+}
+</script></body>
+</html>
