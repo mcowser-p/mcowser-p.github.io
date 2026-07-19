@@ -324,16 +324,6 @@ ${webringStrip}
         : ""
     }
     ${
-      updates.length
-        ? `<div class="box blue">
-      <h3><a class="editlink" href="${newUpdateUrl}" title="Post an update">&#43; new</a>${esc(name)}'s Updates</h3>
-      <ul class="bulletin-list">
-${updates.map((u) => `        <li><span class="bdate">${esc(u.date)}</span> — ${esc(u.excerpt)}</li>`).join("\n")}
-      </ul>
-    </div>`
-        : ""
-    }
-    ${
       Object.keys(details).length
         ? `<div class="box blue">
       <h3>${editIcon("profile.json", "Edit your details")}${esc(name)}'s Details</h3>
@@ -419,6 +409,17 @@ ${Object.entries(blurbs)
       <div class="top8-grid">
 ${top8.map(friendCell).join("\n")}
       </div>
+    </div>`
+        : ""
+    }
+
+    ${
+      updates.length
+        ? `<div class="box orange">
+      <h3><a class="editlink" href="${newUpdateUrl}" title="Post an update">&#43; new</a>${esc(name)}'s Updates</h3>
+      <ul class="bulletin-list">
+${updates.map((u) => `        <li><span class="bdate">${esc(u.date)}</span> — ${esc(u.excerpt)}</li>`).join("\n")}
+      </ul>
     </div>`
         : ""
     }
