@@ -282,7 +282,7 @@ ${webringStrip}
   const statusCard = (u) => `<div class="status" id="${esc(u.slug)}">
   <img src="${esc(profile.avatar)}" onerror="this.onerror=null;this.src='${fallbackAvatar}'" alt="">
   <div>
-    <div class="swho"><b>${esc(name)}</b> @${esc(owner)} &middot; ${esc(u.date)} &middot; <span class="mono">${u.hash}</span> <a class="sperma" href="${siteUrl}updates.html#${esc(u.slug)}" title="permalink">&#128279;</a></div>
+    <div class="swho"><b>${esc(name)}</b> @${esc(owner)} &middot; ${esc(u.date)} &middot; <span class="mono">${u.hash}</span> <a class="sperma" href="${siteUrl}updates.html#${esc(u.slug)}" title="permalink">&#128279;</a> <a class="sperma" href="https://github.com/${repoFull}/delete/main/${esc(u.file)}" title="Delete this update — use a chore: commit message to delete silently">&#128465;&#65039;</a></div>
     <div class="stext">${esc(u.excerpt)}</div>
   </div>
 </div>`;
