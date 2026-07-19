@@ -40,10 +40,10 @@
       "gitster",
       "octocat/Hello-World",
       "python/cpython",
-      "git/git",
-      "opentofu/opentofu",
-      "ansible/ansible",
-      "github/docs"
+      {
+        "user": "defunkt",
+        "note": "github employee #1"
+      }
     ],
     "links": {
       "website": ""
@@ -51,34 +51,52 @@
   },
   "top8": [
     {
+      "kind": "repo",
       "repo": "octocat/Hello-World",
       "url": "https://github.com/octocat/Hello-World",
       "note": ""
     },
     {
-      "repo": "python/cpython",
-      "url": "https://github.com/python/cpython",
-      "note": ""
-    },
-    {
+      "kind": "repo",
       "repo": "git/git",
       "url": "https://github.com/git/git",
       "note": ""
     },
     {
-      "repo": "opentofu/opentofu",
-      "url": "https://github.com/opentofu/opentofu",
+      "kind": "repo",
+      "repo": "torvalds/linux",
+      "url": "https://github.com/torvalds/linux",
       "note": ""
     },
     {
-      "repo": "ansible/ansible",
-      "url": "https://github.com/ansible/ansible",
+      "kind": "repo",
+      "repo": "nodejs/node",
+      "url": "https://github.com/nodejs/node",
       "note": ""
     },
     {
-      "repo": "github/docs",
-      "url": "https://github.com/github/docs",
+      "kind": "repo",
+      "repo": "microsoft/vscode",
+      "url": "https://github.com/microsoft/vscode",
       "note": ""
+    },
+    {
+      "kind": "repo",
+      "repo": "rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust",
+      "note": ""
+    },
+    {
+      "kind": "repo",
+      "repo": "python/cpython",
+      "url": "https://github.com/python/cpython",
+      "note": ""
+    },
+    {
+      "kind": "user",
+      "user": "defunkt",
+      "url": "https://github.com/defunkt",
+      "note": "github employee #1"
     }
   ],
   "following": [

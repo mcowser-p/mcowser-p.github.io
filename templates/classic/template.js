@@ -253,7 +253,7 @@ ${webringStrip}
   const friendCell = (r) => `<div class="friend">
   <a href="${esc(r.url)}"><img src="${esc(r.avatar)}" onerror="this.onerror=null;this.src='${fallbackAvatar}'" alt=""></a>
   <a class="fname" href="${esc(r.url)}">${esc(r.name)}</a>
-  <span class="fowner">${esc(r.owner)}</span>
+  ${r.kind === "repo" ? `<span class="fowner">${esc(r.owner)}</span>` : ""}
   ${r.note ? `<span class="fnote">${esc(r.note)}</span>` : ""}
 </div>`;
 

@@ -47,13 +47,18 @@ It receives `{ owner, repo, repoFull, siteUrl, profile, posts, top8, esc, marked
 
 ### Top 8
 
-Your Top 8 is a ranked grid of repos. List them in `profile.json` in order — projects you're working on, or just repos you like:
+Your Top 8 is a ranked grid of repos **and people**, in `profile.json` in order:
 
 ```json
-"top8": ["octocat/Hello-World", { "repo": "git/git", "note": "the OG" }]
+"top8": [
+  "octocat/Hello-World",
+  { "repo": "git/git", "note": "the OG" },
+  "torvalds",
+  { "user": "alice", "site": "https://alice.github.io/", "note": "bestie" }
+]
 ```
 
-Entries are `owner/repo` strings, or objects with a `note`. Each cell shows the repo owner's avatar and links to the repo. Reordering the array reorders the grid — Top 8 drama, now via pull request.
+`owner/repo` makes a repo cell (owner's avatar, links to the repo). A bare `username` makes a profile cell (their avatar, links to their GitHub — or their GitingSocial site if you set `site`). Reordering the array reorders the grid — Top 8 drama, now via pull request.
 
 ### Following & the Friends Feed
 

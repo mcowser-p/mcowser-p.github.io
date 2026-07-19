@@ -34,20 +34,34 @@ else if (profile.avatar === "cat") profile.avatar = fallbackAvatar;
 // Profile song: a site-relative path (e.g. "assets/song.mp3") or a full URL.
 if (profile.song && !/^https?:/.test(profile.song)) profile.song = siteUrl + profile.song.replace(/^\//, "");
 
-// Top 8: entries are "owner/repo" strings (or { repo, note }), order is the ranking.
+// Top 8: ranked mix of repos and people. "owner/repo" (or {repo, note}) makes a
+// repo cell; a bare "username" (or {user, note, site}) makes a profile cell —
+// linked to their GitHub profile, or their GitingSocial site if `site` is set.
 const top8 = (profile.top8 || [])
   .slice(0, 8)
-  .map((e) => (typeof e === "string" ? { repo: e } : e))
-  .filter((e) => e.repo && e.repo.includes("/"))
+  .map((e) => (typeof e === "string" ? (e.includes("/") ? { repo: e } : { user: e }) : e))
+  .filter((e) => (e.repo && e.repo.includes("/")) || e.user)
   .map((e) => {
-    const [repoOwner, repoName] = e.repo.split("/");
+    if (e.repo) {
+      const [repoOwner, repoName] = e.repo.split("/");
+      return {
+        kind: "repo",
+        repo: e.repo,
+        owner: repoOwner,
+        name: repoName,
+        note: e.note || "",
+        url: `https://github.com/${e.repo}`,
+        avatar: `https://github.com/${repoOwner}.png?size=80`,
+      };
+    }
     return {
-      repo: e.repo,
-      owner: repoOwner,
-      name: repoName,
+      kind: "user",
+      user: e.user,
+      owner: e.user,
+      name: `@${e.user}`,
       note: e.note || "",
-      url: `https://github.com/${e.repo}`,
-      avatar: `https://github.com/${repoOwner}.png?size=80`,
+      url: e.site || `https://github.com/${e.user}`,
+      avatar: `https://github.com/${e.user}.png?size=80`,
     };
   });
 
@@ -222,7 +236,7 @@ fs.writeFileSync(
       site: siteUrl,
       releases_atom: `https://github.com/${repoFull}/releases.atom`,
       profile,
-      top8: top8.map(({ repo, url, note }) => ({ repo, url, note })),
+      top8: top8.map(({ kind, repo, user, url, note }) => ({ kind, repo, user, url, note })),
       following,
       bulletins: bulletins.map((b) => ({ date: b.date, hash: b.hash, text: b.excerpt })),
       wall: { url: `${siteUrl}wall.html`, file: wallFile, markdown: wall },
