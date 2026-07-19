@@ -118,6 +118,11 @@
     },
     {
       "date": "2026-07-18",
+      "hash": "492cec5",
+      "text": "status updates now ship as releases too — follow me with a feed reader on releases.atom, or Watch → Custom → Releases on this repo to get notified"
+    },
+    {
+      "date": "2026-07-18",
       "hash": "87a8bd6",
       "text": "just set up my GitingSocial. it's 2005 again and this time the profile is version controlled"
     }
