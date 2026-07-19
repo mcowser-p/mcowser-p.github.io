@@ -34,7 +34,13 @@
     "gitster",
     "octocat/Hello-World",
     "python/cpython",
-    { "user": "defunkt", "note": "github employee #1" }
+    {
+      "user": "defunkt",
+      "note": "github employee #1"
+    },
+    "ansible/ansible",
+    "opentofu/opentofu",
+    "kubernetes/kubernetes"
   ],
   "links": {
     "website": ""
