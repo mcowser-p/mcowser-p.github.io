@@ -43,7 +43,10 @@
       {
         "user": "defunkt",
         "note": "github employee #1"
-      }
+      },
+      "ansible/ansible",
+      "opentofu/opentofu",
+      "kubernetes/kubernetes"
     ],
     "links": {
       "website": ""
@@ -79,6 +82,24 @@
       "user": "defunkt",
       "url": "https://github.com/defunkt",
       "note": "github employee #1"
+    },
+    {
+      "kind": "repo",
+      "repo": "ansible/ansible",
+      "url": "https://github.com/ansible/ansible",
+      "note": ""
+    },
+    {
+      "kind": "repo",
+      "repo": "opentofu/opentofu",
+      "url": "https://github.com/opentofu/opentofu",
+      "note": ""
+    },
+    {
+      "kind": "repo",
+      "repo": "kubernetes/kubernetes",
+      "url": "https://github.com/kubernetes/kubernetes",
+      "note": ""
     }
   ],
   "following": [
