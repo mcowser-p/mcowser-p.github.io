@@ -240,7 +240,7 @@ fs.writeFileSync(
       profile,
       top8: top8.map(({ kind, repo, user, url, note }) => ({ kind, repo, user, url, note })),
       following,
-      updates: updates.map((u) => ({ date: u.date, hash: u.hash, text: u.excerpt })),
+      updates: updates.map((u) => ({ slug: u.slug, date: u.date, hash: u.hash, text: u.excerpt, url: `${siteUrl}updates.html#${u.slug}` })),
       wall: { url: `${siteUrl}wall.html`, file: wallFile, markdown: wall },
       posts: posts.map((p) => ({
         slug: p.slug,
