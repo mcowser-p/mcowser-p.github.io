@@ -6,7 +6,7 @@ Posts are markdown files. Publishing is a commit. Updates are releases. Hosting 
 
 1. **Use this template** → create a **public** repo (public = free unlimited Actions + free Pages).
 2. **Settings → Pages** → Source: *Deploy from a branch* → Branch: `main`, folder `/docs`.
-3. **Add the topic** `gitsocial-demo` under the repo's About ⚙️ (top-right of the repo page). This is how the index finds you — topics can't be set by the workflow token, so it's the one manual click.
+3. **Add the topic** `gitingsocial` under the repo's About ⚙️ (top-right of the repo page). This is how the index finds you — topics can't be set by the workflow token, so it's the one manual click.
 4. Edit `profile.json`, then go to **Actions → publish → Run workflow** to force the first build (the template-generation commit doesn't always trigger it).
 
 (Or skip all four steps: if you have the `gh` CLI, run the network's `join.sh <template-owner>/<template-repo>` — it does the whole list.)

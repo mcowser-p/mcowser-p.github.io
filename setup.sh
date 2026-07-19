@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publish this folder to GitHub as your network's template repo.
 # Requires: GitHub CLI (`gh`) logged in — check with `gh auth status`.
-# Usage: ./setup.sh [repo-name]     (default: gitsocial-template)
+# Usage: ./setup.sh [repo-name]     (default: gitingsocial-template)
 set -euo pipefail
 
 NAME="${1:-gitingsocial-template}"
