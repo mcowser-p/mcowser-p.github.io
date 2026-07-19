@@ -40,10 +40,7 @@
       "gitster",
       "octocat/Hello-World",
       "python/cpython",
-      {
-        "user": "defunkt",
-        "note": "github employee #1"
-      },
+      "defunkt",
       "ansible/ansible",
       "opentofu/opentofu",
       "kubernetes/kubernetes"
@@ -81,7 +78,7 @@
       "kind": "user",
       "user": "defunkt",
       "url": "https://github.com/defunkt",
-      "note": "github employee #1"
+      "note": ""
     },
     {
       "kind": "repo",
