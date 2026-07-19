@@ -31,8 +31,26 @@ jobs:
           git remote add template "https://github.com/${TEMPLATE_REPO}.git"
           git fetch template main
           git checkout -b template-sync
-          git merge template/main --allow-unrelated-histories -X ours \
-            -m "chore: sync updates from ${TEMPLATE_REPO}"
+          if ! git merge template/main --allow-unrelated-histories -X ours \
+            -m "chore: sync updates from ${TEMPLATE_REPO}"; then
+            # docs/ is regenerated on every push, so any resolution is fine:
+            # take the template side where possible, drop deleted files.
+            # Anything conflicted outside docs/ needs a human.
+            status=0
+            for f in $(git diff --name-only --diff-filter=U); do
+              case "$f" in
+                docs/*)
+                  git checkout --theirs -- "$f" 2>/dev/null && git add -- "$f" || git rm -qf -- "$f"
+                  ;;
+                *)
+                  echo "::error::Unresolved conflict outside docs/: $f — sync manually"
+                  status=1
+                  ;;
+              esac
+            done
+            [ "$status" = "0" ] || exit 1
+            git commit -m "chore: sync updates from ${TEMPLATE_REPO}"
+          fi
           if git diff --quiet main template-sync; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "Already up to date with ${TEMPLATE_REPO}."
