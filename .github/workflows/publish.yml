@@ -19,11 +19,16 @@ jobs:
   # Reads conventional commits since the last tag. A `post:` (or feat:/fix:)
   # commit produces a GitHub Release with generated notes — which also means
   # every profile gets a free syndication feed at /releases.atom.
+  # Runs AFTER build: build pushes a rebuild commit to main, and if that lands
+  # while semantic-release is mid-run it sees the branch move and silently
+  # skips the release. Serializing on the branch tip removes the race.
   release:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main # branch tip, including build's rebuild commit
           fetch-depth: 0 # semantic-release needs full history + tags
       - uses: actions/setup-node@v4
         with:
