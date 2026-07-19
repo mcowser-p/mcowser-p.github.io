@@ -137,6 +137,14 @@
       "excerpt": "This profile is a git repo. This post is a markdown file. The commit that added it said post: hello world , which cut a release — so you can follow me with any feed reader pointed…"
     },
     {
+      "slug": "a-generation-learned-html-from-profile-pages",
+      "title": "A generation learned HTML from profile pages. Git's turn.",
+      "date": "2026-07-18",
+      "hash": "9a93e95",
+      "url": "https://mcowser-p.github.io/p/a-generation-learned-html-from-profile-pages.html",
+      "excerpt": "Nobody in 2005 signed up for a web development course. They signed up for a profile page — and then they wanted a sparkly background, a custom cursor, an autoplaying song, and thei…"
+    },
+    {
       "slug": "a-developer-social-site-on-github",
       "title": "I built a developer social site on GitHub (and you can join)",
       "date": "2026-07-18",

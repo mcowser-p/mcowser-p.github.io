@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A generation learned HTML from profile pages. Git&#39;s turn. | Matthew Cowser&#39;s Blog</title>
+<link rel="stylesheet" href="https://mcowser-p.github.io/style.css?v=9a93e95">
+<link rel="alternate" type="application/atom+xml" href="https://github.com/mcowser-p/mcowser-p.github.io/releases.atom">
+</head>
+<body>
+<div class="topbar">
+  <span class="logo"><a href="https://mcowser-p.github.io/">Giting<span class="logo-accent">Social</span></a></span>
+  <span class="tagline">a place for repos</span>
+</div>
+<div class="navbar">
+  <a href="https://mcowser-p.github.io/">Home</a> <span>|</span>
+  <a href="https://mcowser-p.github.io/friends.html">Friends</a> <span>|</span>
+  <a href="https://mcowser-p.github.io/wall.html">Wall</a> <span>|</span>
+  <a href="https://github.com/mcowser-p/mcowser-p.github.io">Source</a> <span>|</span>
+  <a href="https://github.com/mcowser-p">GitHub</a>
+</div>
+<div class="postpage">
+<p class="back"><a href="https://mcowser-p.github.io/">&laquo; Back to Matthew Cowser's profile</a></p>
+<div class="box orange">
+  <h3><a class="editlink" href="https://github.com/mcowser-p/mcowser-p.github.io/edit/main/posts/2026-07-18-a-generation-learned-html-from-profile-pages.md" title="Edit this post">&#9998;</a>A generation learned HTML from profile pages. Git&#39;s turn.</h3>
+  <div class="pad post-body">
+    <div class="post-meta">2026-07-18 · commit <b>9a93e95</b></div>
+    <p>Nobody in 2005 signed up for a web development course. They signed up for a
+profile page — and then they wanted a sparkly background, a custom cursor, an
+autoplaying song, and their best friend moved up a row in the friend grid.</p>
+<p>The way you got those things was HTML. You didn&#39;t <em>learn HTML</em> and then
+customize your page; you customized your page and discovered afterward that
+you&#39;d learned HTML. View source. Copy the code. Paste it in the box. Change the
+color. Refresh. A whole generation ran that loop ten thousand times, and a lot
+of them are professional developers today because a <code>&lt;marquee&gt;</code> tag once did
+exactly what they told it to.</p>
+<p>The lesson wasn&#39;t about HTML at all. It&#39;s this: <strong>people learn a tool when the
+tool is bolted to their identity and their friends can see the result.</strong>
+Curriculum can&#39;t compete with vanity. Documentation can&#39;t compete with a
+friend grid.</p>
+<h2>The tool nobody learns that way anymore</h2>
+<p>Ask a new developer what the scariest part of their first job or first class
+was. It&#39;s rarely the language. It&#39;s git — learned under pressure, from error
+messages, usually the week something already went wrong. <code>detached HEAD</code>,
+<code>merge conflict</code>, <code>non-fast-forward</code>. We take the single most important
+collaboration tool in software and introduce it as a hazing ritual.</p>
+<p>Git deserves the profile-page treatment.</p>
+<h2>So that&#39;s what this site is</h2>
+<p>This profile is a git repo, and every social action on it is a git operation
+wearing a fun outfit:</p>
+<ul>
+<li><strong>Posting</strong> this entry was a commit (<code>post: ...</code> — it cut a release, which is
+the feed my followers subscribe to)</li>
+<li><strong>Updating my mood</strong> is editing a JSON file</li>
+<li><strong>A friend request</strong> is a pull request that adds one file</li>
+<li><strong>Accepting it</strong> is merging; <strong>rejecting</strong> it is closing</li>
+<li><strong>Signing my wall</strong> is a PR to a markdown file; moderation is code review</li>
+<li><strong>Unfollowing</strong> someone is <code>git rm friends/them.json</code> — arguably healthier
+than the button ever was</li>
+<li>Rearranging the <strong>Top 8</strong> is reordering an array, and yes, the commit history
+preserves the drama forever</li>
+</ul>
+<p>By the time you&#39;ve made your page look right, you have cloned, committed,
+pushed, branched, opened a PR, resolved a merge, and read a diff — not because
+a tutorial told you to, but because you wanted your song on your page and your
+friend in slot one. The repo is the profile. The workflow is the network.
+The learning is the side effect, same as it ever was.</p>
+<p>If you want in: <a href="https://github.com/mcowser-p/GitingSocial-Template">the template is here</a>,
+setup takes two minutes, and the first thing you&#39;ll do — whether you know it or
+not — is make a commit.</p>
+<p>The kids learned HTML from glitter graphics. Maybe someone learns rebase
+because of a Top 8. Stranger things have shipped.</p>
+
+  </div>
+</div>
+</div>
+<div class="webring">GitingSocial webring:
+  <a href="https://mcowser-p.github.io/giting-social-template/">&larr; prev</a> &middot;
+  <a href="#" onclick="location.href=WEBRING[Math.floor(Math.random()*WEBRING.length)];return false">random</a> &middot;
+  <a href="https://mcowser-p.github.io/giting-social-template/">next &rarr;</a>
+</div>
+<script>var WEBRING=["https://mcowser-p.github.io/","https://mcowser-p.github.io/giting-social-template/"];</script>
+<div class="pagefoot">&copy;2005-forever Matthew Cowser · generated from <a href="https://github.com/mcowser-p/mcowser-p.github.io">mcowser-p/mcowser-p.github.io</a> · every post is a commit</div>
+<script>
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  var last = 0;
+  addEventListener("mousemove", function (e) {
+    var now = Date.now();
+    if (now - last < 60) return;
+    last = now;
+    var s = document.createElement("span");
+    s.className = "spark";
+    s.textContent = "\u2726";
+    s.style.left = e.clientX + 6 + "px";
+    s.style.top = e.clientY + 6 + "px";
+    document.body.appendChild(s);
+    setTimeout(function () { s.remove(); }, 700);
+  });
+}
+</script></body>
+</html>
