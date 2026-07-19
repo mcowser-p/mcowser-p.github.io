@@ -1,4 +1,4 @@
-// "classic" — GitingSocial, a place for repos. 2005-era profile: blue header, two columns,
+// "classic" — GitingSocial, a social place for repos. 2005-era profile: blue header, two columns,
 // contact box, extended-network banner, blurbs, Top 8 repos, blog entries.
 // Contract: module.exports = (ctx) => { "relative/path": "file contents", ... }
 
@@ -181,7 +181,7 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const chrome = (body) => `
 <div class="topbar">
   <span class="logo"><a href="${siteUrl}">Giting<span class="logo-accent">Social</span></a></span>
-  <span class="tagline">a place for repos</span>
+  <span class="tagline">a social place for repos</span>
 </div>
 <div class="navbar">
   <a href="${siteUrl}">Home</a> <span>|</span>

@@ -34,7 +34,7 @@ Commit types that *aren't* releasable (`chore:`, `docs:`, etc.) still rebuild th
 
 Pick a look in `profile.json` with `"template": "<name>"`:
 
-- **`classic`** *(default)* — GitingSocial, a place for repos. Blue header, contact box, blurbs, "extended network" banner, and your **Top 8**. It's 2005 and your profile is a git repo.
+- **`classic`** *(default)* — GitingSocial, a social place for repos. Blue header, contact box, blurbs, "extended network" banner, and your **Top 8**. It's 2005 and your profile is a git repo.
 - **`gitlog`** — minimal commit-timeline look.
 
 Or build your own: copy any folder in `templates/`, rename it, and point `profile.json` at it. A template is one file, `templates/<name>/template.js`, exporting a function:
