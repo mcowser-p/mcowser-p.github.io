@@ -129,14 +129,6 @@
   },
   "posts": [
     {
-      "slug": "hello-world",
-      "title": "Hello, world",
-      "date": "2026-07-18",
-      "hash": "ec40404",
-      "url": "https://mcowser-p.github.io/p/hello-world.html",
-      "excerpt": "This profile is a git repo. This post is a markdown file. The commit that added it said post: hello world , which cut a release — so you can follow me with any feed reader pointed…"
-    },
-    {
       "slug": "a-generation-learned-html-from-profile-pages",
       "title": "A generation learned HTML from profile pages. Git's turn.",
       "date": "2026-07-18",
