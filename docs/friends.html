@@ -122,5 +122,22 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     setTimeout(function () { s.remove(); }, 700);
   });
 }
+</script>
+<!-- but most of all, samy is my hero -->
+<script>
+(function () {
+  var buf = "";
+  addEventListener("keydown", function (e) {
+    if (!e.key || e.key.length !== 1 || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    buf = (buf + e.key.toLowerCase()).slice(-4);
+    if (buf !== "samy") return;
+    buf = "";
+    var t = document.querySelector(".blurbs .pad p:last-of-type") || document.querySelector(".pagefoot");
+    if (!t || t.dataset.samy) return;
+    t.dataset.samy = "1";
+    t.appendChild(document.createTextNode(" but most of all, samy is my hero"));
+    console.log("popup popup popup — 2005 never forgets");
+  });
+})();
 </script></body>
 </html>

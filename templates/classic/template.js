@@ -195,7 +195,24 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
 </div>
 ${body}
 ${webringStrip}
-<div class="pagefoot">&copy;2005-forever ${esc(name)} · generated from <a href="https://github.com/${repoFull}">${repoFull}</a> · every post is a commit</div>${sparkleScript}`;
+<div class="pagefoot">&copy;2005-forever ${esc(name)} · generated from <a href="https://github.com/${repoFull}">${repoFull}</a> · every post is a commit</div>${sparkleScript}
+<!-- but most of all, samy is my hero -->
+<script>
+(function () {
+  var buf = "";
+  addEventListener("keydown", function (e) {
+    if (!e.key || e.key.length !== 1 || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    buf = (buf + e.key.toLowerCase()).slice(-4);
+    if (buf !== "samy") return;
+    buf = "";
+    var t = document.querySelector(".blurbs .pad p:last-of-type") || document.querySelector(".pagefoot");
+    if (!t || t.dataset.samy) return;
+    t.dataset.samy = "1";
+    t.appendChild(document.createTextNode(" but most of all, samy is my hero"));
+    console.log("popup popup popup — 2005 never forgets");
+  });
+})();
+</script>`;
 
   const shell = (title, body) => `<!doctype html>
 <html lang="en">
