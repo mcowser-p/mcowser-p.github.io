@@ -2,7 +2,7 @@
 // contact box, extended-network banner, blurbs, Top 8 repos, blog entries.
 // Contract: module.exports = (ctx) => { "relative/path": "file contents", ... }
 
-module.exports = function render({ owner, repoFull, siteUrl, profile, posts, bulletins, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked }) {
+module.exports = function render({ owner, repoFull, siteUrl, profile, posts, updates, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked }) {
   const name = profile.name || owner;
   const lastUpdate = posts.length ? posts[0].date : "never";
   const flair = profile.flair || {};
@@ -214,8 +214,8 @@ ${webringStrip}
   const newPostUrl = `https://github.com/${repoFull}/new/main?filename=posts/${today}-my-new-post.md&value=${encodeURIComponent(
     `---\ntitle: My new post\ndate: ${today}\n---\n\nWrite your post here, then commit with a message like \`post: my new post\` to publish it as a release.\n`
   )}`;
-  const newBulletinUrl = `https://github.com/${repoFull}/new/main?filename=posts/${today}-bulletin.md&value=${encodeURIComponent(
-    `---\ntype: bulletin\ndate: ${today}\n---\n\nyour status here\n`
+  const newUpdateUrl = `https://github.com/${repoFull}/new/main?filename=posts/${today}-update.md&value=${encodeURIComponent(
+    `---\ntype: update\ndate: ${today}\n---\n\nyour status here\n`
   )}`;
 
   // Details/Interests are free-form key/value maps from profile.json; a value
@@ -321,11 +321,11 @@ ${webringStrip}
         : ""
     }
     ${
-      bulletins.length
+      updates.length
         ? `<div class="box blue">
-      <h3><a class="editlink" href="${newBulletinUrl}" title="Post a bulletin">&#43; new</a>${esc(name)}'s Bulletins</h3>
+      <h3><a class="editlink" href="${newUpdateUrl}" title="Post an update">&#43; new</a>${esc(name)}'s Updates</h3>
       <ul class="bulletin-list">
-${bulletins.map((b) => `        <li><span class="bdate">${esc(b.date)}</span> — ${esc(b.excerpt)}</li>`).join("\n")}
+${updates.map((u) => `        <li><span class="bdate">${esc(u.date)}</span> — ${esc(u.excerpt)}</li>`).join("\n")}
       </ul>
     </div>`
         : ""

@@ -1,5 +1,5 @@
 ---
-type: bulletin
+type: update
 date: 2026-07-18
 ---
 

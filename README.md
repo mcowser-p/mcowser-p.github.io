@@ -99,9 +99,9 @@ The classic profile boxes, all optional, all free-form in `profile.json` — you
 
 `details` and `interests` are label → text maps; an interests value can itself be a map for bold sub-sections (Bands, Solo Artists, …). Multi-line strings render as line breaks. Empty or missing = the box doesn't render.
 
-### Bulletins
+### Updates
 
-A post with `type: bulletin` in its front matter is a status, not an essay: it shows in a Bulletins box on your profile (and in `feed.json`) but gets no page and stays out of the blog. Same deal as posts otherwise — it's a markdown file and a commit.
+A post with `type: update` in its front matter is a status, not an essay: it shows in an Updates box on your profile (and in `feed.json`) but gets no page and stays out of the blog. Same deal as posts otherwise — it's a markdown file and a commit. (`type: bulletin` is a legacy alias.)
 
 ### The Wall
 
