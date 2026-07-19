@@ -3,6 +3,9 @@
 // Contract: module.exports = (ctx) => { "relative/path": "file contents", ... }
 
 module.exports = function render({ owner, repoFull, siteUrl, profile, posts, updates, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked }) {
+  // Canonical template repo: Template Me / Star Me / Report a Bug all point here
+  // so every member profile funnels growth and bug reports to the network hub.
+  const TEMPLATE_REPO = "mcowser-p/GitingSocial-Template";
   const name = profile.name || owner;
   const lastUpdate = posts.length ? posts[0].date : "never";
   const flair = profile.flair || {};
@@ -298,9 +301,9 @@ ${webringStrip}
       <h3>Contacting ${esc(name)}</h3>
       <div class="contact-grid">
         <a href="https://github.com/${repoFull}/new/main?filename=friends/YOUR-USERNAME.json&value=${encodeURIComponent('{ "repo": "YOUR-USERNAME/YOUR-REPO" }\n')}" title="Add a file with your repo to my friends/ folder — the PR is the friend request">&#129309; Add to Friends</a>
-        <a href="https://github.com/${repoFull}/fork">&#127860; Fork Me</a>
-        <a href="https://github.com/${repoFull}/issues">&#128027; Report a Bug</a>
-        <a href="https://github.com/${repoFull}">&#11088; Star Me</a>
+        <a href="https://github.com/${TEMPLATE_REPO}/generate" title="Make your own GitingSocial profile">&#10024; Template Me</a>
+        <a href="https://github.com/${TEMPLATE_REPO}/issues" title="File an issue on the GitingSocial template">&#128027; Report a Bug</a>
+        <a href="https://github.com/${TEMPLATE_REPO}" title="Star the GitingSocial template">&#11088; Star Me</a>
         <a href="https://github.com/${repoFull}/releases.atom" title="Atom feed of my releases — point a feed reader at this">&#128225; Subscribe (RSS)</a>
         <a href="https://github.com/${repoFull}/edit/main/${wallFile}" title="Sign via pull request">&#9997;&#65039; Sign My Wall</a>
       </div>
