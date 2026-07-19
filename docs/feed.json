@@ -110,7 +110,7 @@
       "feed": "https://mcowser-p.github.io/giting-social-template/feed.json"
     }
   ],
-  "bulletins": [
+  "updates": [
     {
       "date": "2026-07-19",
       "hash": "6fc745b",

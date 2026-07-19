@@ -157,10 +157,12 @@ const allPosts = fs
   })
   .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug < b.slug ? 1 : -1));
 
-// Bulletins (front matter `type: bulletin`) are short one-off statuses: they show
-// on the profile but get no page of their own and stay out of the blog.
-const bulletins = allPosts.filter((p) => p.type === "bulletin");
-const posts = allPosts.filter((p) => p.type !== "bulletin");
+// Updates (front matter `type: update`; `bulletin` is a legacy alias) are short
+// one-off statuses: they show on the profile but get no page of their own and
+// stay out of the blog.
+const isUpdate = (p) => p.type === "update" || p.type === "bulletin";
+const updates = allPosts.filter(isUpdate);
+const posts = allPosts.filter((p) => !isUpdate(p));
 
 // The wall: a markdown file visitors sign via PR. Rendered as-is by templates.
 // (guestbook.md is the legacy name, still honored for un-migrated repos.)
@@ -191,7 +193,7 @@ if (!fs.existsSync(templateFile)) {
 }
 const render = require(templateFile);
 
-const ctx = { owner, repo, repoFull, siteUrl, profile, posts, bulletins, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked };
+const ctx = { owner, repo, repoFull, siteUrl, profile, posts, updates, top8, following, wall, wallFile, webring, fallbackAvatar, buildId, esc, marked };
 const files = render(ctx);
 
 // ---------- write docs/ ----------
@@ -238,7 +240,7 @@ fs.writeFileSync(
       profile,
       top8: top8.map(({ kind, repo, user, url, note }) => ({ kind, repo, user, url, note })),
       following,
-      bulletins: bulletins.map((b) => ({ date: b.date, hash: b.hash, text: b.excerpt })),
+      updates: updates.map((u) => ({ date: u.date, hash: u.hash, text: u.excerpt })),
       wall: { url: `${siteUrl}wall.html`, file: wallFile, markdown: wall },
       posts: posts.map((p) => ({
         slug: p.slug,

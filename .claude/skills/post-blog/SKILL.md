@@ -1,6 +1,6 @@
 ---
 name: post-blog
-description: Write and publish a blog post or bulletin on a GitingSocial profile site. Use when the user wants to post, blog, publish a status update or bulletin, edit a post, or unpublish something on their GitingSocial site.
+description: Write and publish a blog post or status update on a GitingSocial profile site. Use when the user wants to post, blog, publish a status update, edit a post, or unpublish something on their GitingSocial site.
 ---
 
 # Posting on GitingSocial
@@ -32,11 +32,12 @@ Commit with the `post:` type — this is what publishes it as a release:
 git add posts/ && git commit -m "post: my post title" && git push
 ```
 
-## Bulletin (short status, no page)
+## Update (short status, no page)
 
-Same, but add `type: bulletin` to the front matter. Bulletins show in the
-profile's Bulletins box and feed.json but get no page and stay out of the blog.
-Commit with `chore:` unless the user wants a release cut for it.
+Same, but add `type: update` to the front matter (`bulletin` is a legacy
+alias). Updates show in the profile's Updates box and feed.json but get no
+page and stay out of the blog. Commit with `chore:` unless the user wants a
+release cut for it.
 
 ## What a push does
 
@@ -44,7 +45,7 @@ Commit with `chore:` unless the user wants a release cut for it.
   Release (release notes = the feed entry followers see via `releases.atom`),
   AND the site rebuilds.
 - **`chore:` / `docs:` commit** → site rebuilds only, no release. Use for
-  profile edits, bulletins, wall moderation.
+  profile edits, updates, wall moderation.
 
 The build commits generated `docs/` back to `main` itself — never edit `docs/`
 by hand, and don't be surprised by `chore: rebuild site` bot commits.
