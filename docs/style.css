@@ -116,6 +116,15 @@ a:hover{color:#FF6600; color:var(--accent)}
 .bulletin-list li{margin-bottom:8px}
 .bulletin-list .bdate{color:#666}
 
+.status{display:flex; gap:8px; padding:10px 8px; border-bottom:1px dashed #FFCC99; border-bottom-color:var(--accent-soft)}
+.status:last-child{border-bottom:none}
+.status img{width:36px; height:36px; border:1px solid #999; object-fit:cover; background:#DDE3E8; flex-shrink:0}
+.status .swho{font-size:11px; color:#666}
+.status .swho b{color:#003399}
+.status .stext{font-size:12px; margin-top:2px}
+.status .sperma{text-decoration:none; color:#999}
+.status .sperma:hover{color:var(--accent)}
+
 .guestbook-body{font-size:12px}
 .guestbook-body ul{list-style:none; margin:0; padding:0}
 .guestbook-body li{padding:8px 0; border-bottom:1px dashed #CCC}

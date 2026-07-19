@@ -129,6 +129,15 @@ a:hover{color:#FF6600; color:var(--accent)}
 .bulletin-list li{margin-bottom:8px}
 .bulletin-list .bdate{color:#666}
 
+.status{display:flex; gap:8px; padding:10px 8px; border-bottom:1px dashed #FFCC99; border-bottom-color:var(--accent-soft)}
+.status:last-child{border-bottom:none}
+.status img{width:36px; height:36px; border:1px solid #999; object-fit:cover; background:#DDE3E8; flex-shrink:0}
+.status .swho{font-size:11px; color:#666}
+.status .swho b{color:#003399}
+.status .stext{font-size:12px; margin-top:2px}
+.status .sperma{text-decoration:none; color:#999}
+.status .sperma:hover{color:var(--accent)}
+
 .guestbook-body{font-size:12px}
 .guestbook-body ul{list-style:none; margin:0; padding:0}
 .guestbook-body li{padding:8px 0; border-bottom:1px dashed #CCC}
@@ -269,6 +278,14 @@ ${webringStrip}
           "About me": profile.bio || "I put my whole profile in a git repo and all I got was this website.",
           "Who I'd like to meet": "Anyone with a green contribution graph and a feed reader.",
         };
+
+  const statusCard = (u) => `<div class="status" id="${esc(u.slug)}">
+  <img src="${esc(profile.avatar)}" onerror="this.onerror=null;this.src='${fallbackAvatar}'" alt="">
+  <div>
+    <div class="swho"><b>${esc(name)}</b> @${esc(owner)} &middot; ${esc(u.date)} &middot; <span class="mono">${u.hash}</span> <a class="sperma" href="${siteUrl}updates.html#${esc(u.slug)}" title="permalink">&#128279;</a></div>
+    <div class="stext">${esc(u.excerpt)}</div>
+  </div>
+</div>`;
 
   const friendCell = (r) => `<div class="friend">
   <a href="${esc(r.url)}"><img src="${esc(r.avatar)}" onerror="this.onerror=null;this.src='${fallbackAvatar}'" alt=""></a>
@@ -433,10 +450,8 @@ ${top8.map(friendCell).join("\n")}
     ${
       updates.length
         ? `<div class="box orange">
-      <h3><a class="editlink" href="${newUpdateUrl}" title="Post an update">&#43; new</a>${esc(name)}'s Updates</h3>
-      <ul class="bulletin-list">
-${updates.map((u) => `        <li><span class="bdate">${esc(u.date)}</span> — ${esc(u.excerpt)}</li>`).join("\n")}
-      </ul>
+      <h3><a class="editlink" href="${newUpdateUrl}" title="Post an update">&#43; new</a>${esc(name)}'s Updates <a style="color:#8B2500" href="${siteUrl}updates.html">[View All]</a></h3>
+${updates.slice(0, 5).map(statusCard).join("\n")}
     </div>`
         : ""
     }
@@ -551,6 +566,16 @@ ${following
     "style.css": CSS,
     "index.html": shell(`${name} | GitingSocial`, chrome(indexBody)),
     "friends.html": shell(`${name}'s Friends Feed | GitingSocial`, chrome(friendsBody)),
+    "updates.html": shell(
+      `${name}'s Updates | GitingSocial`,
+      chrome(`<div class="postpage">
+<p class="back"><a href="${siteUrl}">&laquo; Back to ${esc(name)}'s profile</a></p>
+<div class="box orange">
+  <h3><a class="editlink" href="${newUpdateUrl}" title="Post an update">&#43; new</a>${esc(name)}'s Updates</h3>
+${updates.length ? updates.map(statusCard).join("\n") : '<div class="fstatus">No updates yet.</div>'}
+</div>
+</div>`)
+    ),
     "wall.html": shell(
       `${name}'s Wall | GitingSocial`,
       chrome(`<div class="postpage">
